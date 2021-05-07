@@ -26,22 +26,20 @@ generate-copy:
 	$(CONTROLLER_GEN) object:headerFile=$(header_file) paths=$(path_apis)
 
 generate-client:
-	$(CLIENT_GEN) --clientset-name versioned --input-base "" --input $(kube_api_packages) --output-package $(kube_clientset_package) -h $(header_file)
+	rm -rf maistra.io
+	$(CLIENT_GEN) --clientset-name versioned --input-base "" --input $(kube_api_packages) --output-package $(kube_clientset_package) -h $(header_file) --output-base ./
+	$(LISTER_GEN) --input-dirs $(kube_api_packages) --output-package $(kube_listers_package) -h $(header_file) --output-base ./
+	$(INFORMER_GEN) --input-dirs $(kube_api_packages) --versioned-clientset-package $(kube_clientset_package)/versioned --listers-package $(kube_listers_package) --output-package $(kube_informers_package) -h $(header_file) --output-base ./
+	rm -rf client && mv maistra.io/api/client . && rm -rf maistra.io
 	## Hack - Because we are using core, client-gen hardcodes it to /api
 	find client -name core_client.go -exec sed -i 's|config.APIPath = "/api"|config.APIPath = "/apis"|' {} \;
-
-generate-lister:
-	$(LISTER_GEN) --input-dirs $(kube_api_packages) --output-package $(kube_listers_package) -h $(header_file)
-
-generate-informer:
-	$(INFORMER_GEN) --input-dirs $(kube_api_packages) --versioned-clientset-package $(kube_clientset_package)/versioned --listers-package $(kube_listers_package) --output-package $(kube_informers_package) -h $(header_file)
 
 clean:
 	rm -rf client manifests
 	find core -name zz_generated.deepcopy.go -delete
 
 all: gen
-gen: generate-client generate-lister generate-informer generate-copy generate-crd
+gen: generate-client generate-copy generate-crd
 	go mod tidy
 	go mod vendor
 
