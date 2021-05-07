@@ -2,6 +2,8 @@
 
 This repository contains Go API, Kubernetes CRD's and a Go client for dealing with Maistra objects.
 
+test
+
 ## Tree hierarchy
 
 ### API
