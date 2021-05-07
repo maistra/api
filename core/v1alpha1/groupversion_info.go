@@ -39,6 +39,7 @@ func init() {
 	SchemeBuilder.Register(
 		&ServiceMeshExtension{}, &ServiceMeshExtensionList{},
 		&MeshFederation{}, &MeshFederationList{},
+		&ServiceExports{}, &ServiceExportsList{},
 	)
 }
 
