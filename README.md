@@ -14,6 +14,7 @@ The API itself is contained in these directories, with a version (e.g. `v1` or `
    - `ServiceMeshMemberRoll`.
  - `core/v1alpha1`: Contains the following types:
    - `ServiceMeshExtension`
+   - `ServiceExports`
    - `MeshFederation`.
  - `core/v2`: Contains the following types:
    - `ServiceMeshControlPlane`.

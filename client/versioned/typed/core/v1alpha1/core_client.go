@@ -25,6 +25,7 @@ import (
 type CoreV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	MeshFederationsGetter
+	ServiceExportsGetter
 	ServiceMeshExtensionsGetter
 }
 
@@ -35,6 +36,10 @@ type CoreV1alpha1Client struct {
 
 func (c *CoreV1alpha1Client) MeshFederations(namespace string) MeshFederationInterface {
 	return newMeshFederations(c, namespace)
+}
+
+func (c *CoreV1alpha1Client) ServiceExports(namespace string) ServiceExportsInterface {
+	return newServiceExports(c, namespace)
 }
 
 func (c *CoreV1alpha1Client) ServiceMeshExtensions(namespace string) ServiceMeshExtensionInterface {
