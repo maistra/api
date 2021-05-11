@@ -54,7 +54,7 @@ security_v1_protos := $(wildcard $(security_v1_path)/*.proto)
 security_v1_pb_gos := $(security_v1_protos:.proto=.pb.go)
 
 generate-crd:
-	$(CONTROLLER_GEN) crd:preserveUnknownFields=false,crdVersions=v1beta1 paths=$(path_apis) output:dir=./manifests/
+	$(CONTROLLER_GEN) crd:preserveUnknownFields=false,crdVersions=v1 paths=$(path_apis) output:dir=./manifests/
 	sed -i -e '/---/d' ./manifests/maistra.io_*.yaml
 
 generate-copy:
