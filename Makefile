@@ -2,6 +2,7 @@ CONTROLLER_GEN = go run vendor/sigs.k8s.io/controller-tools/cmd/controller-gen/m
 LISTER_GEN     = go run vendor/k8s.io/code-generator/cmd/lister-gen/main.go
 INFORMER_GEN   = go run vendor/k8s.io/code-generator/cmd/informer-gen/main.go
 CLIENT_GEN     = go run vendor/k8s.io/code-generator/cmd/client-gen/main.go
+CONVERSION_GEN = go run vendor/k8s.io/code-generator/cmd/conversion-gen/main.go
 
 empty :=
 space := $(empty) $(empty)
@@ -78,12 +79,16 @@ ${security_v1_pb_gos}: ${security_v1_protos}
 	$(protoc) $^
 	cp -r /tmp/maistra.io/api/security/* security
 
+generate-conversion:
+	$(CONVERSION_GEN) --input-dirs $(kube_api_packages) --output-package $(kube_base_output_package) -h $(header_file) --output-base ./
+	mv maistra.io/api/core/v1alpha1/* core/v1alpha1/ && rm -rf maistra.io
+
 clean:
 	rm -rf client manifests
-	find core -name zz_generated.deepcopy.go -delete
+	find core -name zz_generated.deepcopy.go -o -name conversion_generated.go -delete
 
 all: gen
-gen: generate-client generate-copy generate-crd generate-proto
+gen: generate-client generate-copy generate-crd generate-conversion generate-proto
 	go mod tidy
 	go mod vendor
 
