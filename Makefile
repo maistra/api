@@ -17,6 +17,7 @@ kube_listers_package     = $(kube_base_output_package)/client/listers
 kube_informers_package   = $(kube_base_output_package)/client/informers
 path_apis                = "./core/..."
 header_file              = "header.go.txt"
+plural_exceptions        = ServiceExports:ServiceExports,ServiceImports:ServiceImports
 
 generate-crd:
 	$(CONTROLLER_GEN) crd:preserveUnknownFields=false,crdVersions=v1beta1 paths=$(path_apis) output:dir=./manifests/
@@ -27,9 +28,9 @@ generate-copy:
 
 generate-client:
 	rm -rf maistra.io
-	$(CLIENT_GEN) --clientset-name versioned --input-base "" --input $(kube_api_packages) --output-package $(kube_clientset_package) -h $(header_file) --output-base ./ --plural-exceptions ServiceExports:ServiceExports
-	$(LISTER_GEN) --input-dirs $(kube_api_packages) --output-package $(kube_listers_package) -h $(header_file) --output-base ./ --plural-exceptions ServiceExports:ServiceExports
-	$(INFORMER_GEN) --input-dirs $(kube_api_packages) --versioned-clientset-package $(kube_clientset_package)/versioned --listers-package $(kube_listers_package) --output-package $(kube_informers_package) -h $(header_file) --output-base ./ --plural-exceptions ServiceExports:ServiceExports
+	$(CLIENT_GEN) --clientset-name versioned --input-base "" --input $(kube_api_packages) --output-package $(kube_clientset_package) -h $(header_file) --output-base ./ --plural-exceptions $(plural_exceptions)
+	$(LISTER_GEN) --input-dirs $(kube_api_packages) --output-package $(kube_listers_package) -h $(header_file) --output-base ./ --plural-exceptions $(plural_exceptions)
+	$(INFORMER_GEN) --input-dirs $(kube_api_packages) --versioned-clientset-package $(kube_clientset_package)/versioned --listers-package $(kube_listers_package) --output-package $(kube_informers_package) -h $(header_file) --output-base ./ --plural-exceptions $(plural_exceptions)
 	rm -rf client && mv maistra.io/api/client . && rm -rf maistra.io
 	## Hack - Because we are using core, client-gen hardcodes it to /api
 	find client -name core_client.go -exec sed -i 's|config.APIPath = "/api"|config.APIPath = "/apis"|' {} \;
