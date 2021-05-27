@@ -19,6 +19,39 @@ path_apis                = "./core/..."
 header_file              = "header.go.txt"
 plural_exceptions        = ServiceExports:ServiceExports,ServiceImports:ServiceImports
 
+# protobuf
+out_path = /tmp
+
+gogofast_plugin_prefix := --gogofast_out=plugins=grpc,
+
+comma := ,
+empty :=
+space := $(empty) $(empty)
+
+importmaps := \
+	gogoproto/gogo.proto=github.com/gogo/protobuf/gogoproto \
+	google/protobuf/any.proto=github.com/gogo/protobuf/types \
+	google/protobuf/descriptor.proto=github.com/gogo/protobuf/protoc-gen-gogo/descriptor \
+	google/protobuf/duration.proto=github.com/gogo/protobuf/types \
+	google/protobuf/struct.proto=github.com/gogo/protobuf/types \
+	google/protobuf/timestamp.proto=github.com/gogo/protobuf/types \
+	google/protobuf/wrappers.proto=github.com/gogo/protobuf/types \
+	google/rpc/status.proto=istio.io/gogo-genproto/googleapis/google/rpc \
+	google/rpc/code.proto=istio.io/gogo-genproto/googleapis/google/rpc \
+	google/rpc/error_details.proto=istio.io/gogo-genproto/googleapis/google/rpc \
+	google/api/field_behavior.proto=istio.io/gogo-genproto/googleapis/google/api \
+
+mapping_with_spaces := $(foreach map,$(importmaps),M$(map),)
+gogo_mapping := $(subst $(space),$(empty),$(mapping_with_spaces))
+
+gogofast_plugin := $(gogofast_plugin_prefix)$(gogo_mapping):$(out_path)
+
+protoc = protoc -I. ${gogofast_plugin} --deepcopy_out=${out_path}
+
+security_v1_path := security/v1
+security_v1_protos := $(wildcard $(security_v1_path)/*.proto)
+security_v1_pb_gos := $(security_v1_protos:.proto=.pb.go)
+
 generate-crd:
 	$(CONTROLLER_GEN) crd:preserveUnknownFields=false,crdVersions=v1beta1 paths=$(path_apis) output:dir=./manifests/
 	sed -i -e '/---/d' ./manifests/maistra.io_*.yaml
@@ -35,12 +68,22 @@ generate-client:
 	## Hack - Because we are using core, client-gen hardcodes it to /api
 	find client -name core_client.go -exec sed -i 's|config.APIPath = "/api"|config.APIPath = "/apis"|' {} \;
 
+remove-proto:
+	rm -f ${security_v1_path}/*.gen.go
+	rm -f ${security_v1_path}/*.pb.go
+
+generate-proto: remove-proto ${security_v1_pb_gos}
+
+${security_v1_pb_gos}: ${security_v1_protos}
+	$(protoc) $^
+	cp -r /tmp/maistra.io/api/security/* security
+
 clean:
 	rm -rf client manifests
 	find core -name zz_generated.deepcopy.go -delete
 
 all: gen
-gen: generate-client generate-copy generate-crd
+gen: generate-client generate-copy generate-crd generate-proto
 	go mod tidy
 	go mod vendor
 
