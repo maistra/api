@@ -75,33 +75,11 @@ spec:
           type: object
         status:
           description: TODO
-          properties:
-            conditions:
-              items:
-                properties:
-                  lastTransitionTime:
-                    description: Last time the condition transitioned from one status to another.
-                    format: date-time
-                    type: string
-                  message:
-                    description: Human-readable message indicating details about the last transition.
-                    type: string
-                  reason:
-                    description: Unique, single-word, CamelCase reason for the condition's last transition.
-                    type: string
-                  status:
-                    description: The status of this condition. Can be True, False or Unknown.
-                    type: string
-                  type:
-                    description: The type of this condition.
-                    type: string
-                type: object
-              type: array
           type: object
       type: object
-  version: v1alpha1
+  version: v1
   versions:
-  - name: v1alpha1
+  - name: v1
     served: true
     storage: true
 status:

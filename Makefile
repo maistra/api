@@ -80,15 +80,16 @@ ${security_v1_pb_gos}: ${security_v1_protos}
 	cp -r /tmp/maistra.io/api/security/* security
 
 generate-conversion:
-	$(CONVERSION_GEN) --input-dirs $(kube_api_packages) --output-package $(kube_base_output_package) -h $(header_file) --output-base ./
+	# --base-peer-dirs includes metav1, which causes conversion funcs to be generated for converting metav1.Condition to/from v1.Condition
+	$(CONVERSION_GEN) --input-dirs $(kube_api_packages) --output-package $(kube_base_output_package) -h $(header_file) --output-base ./ --base-peer-dirs k8s.io/apimachinery/pkg/conversion,k8s.io/apimachinery/pkg/runtime
 	mv maistra.io/api/core/v1alpha1/* core/v1alpha1/ && rm -rf maistra.io
 
 clean:
 	rm -rf client manifests
-	find core -name zz_generated.deepcopy.go -o -name conversion_generated.go -delete
+	find core -name zz_generated.deepcopy.go -delete -o -name conversion_generated.go -delete
 
 all: gen
-gen: generate-client generate-copy generate-crd generate-conversion generate-proto
+gen: generate-copy generate-client generate-crd generate-conversion generate-proto
 	go mod tidy
 	go mod vendor
 
