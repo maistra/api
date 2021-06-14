@@ -1,8 +1,8 @@
-CONTROLLER_GEN = go run vendor/sigs.k8s.io/controller-tools/cmd/controller-gen/main.go
-LISTER_GEN     = go run vendor/k8s.io/code-generator/cmd/lister-gen/main.go
-INFORMER_GEN   = go run vendor/k8s.io/code-generator/cmd/informer-gen/main.go
-CLIENT_GEN     = go run vendor/k8s.io/code-generator/cmd/client-gen/main.go
-CONVERSION_GEN = go run vendor/k8s.io/code-generator/cmd/conversion-gen/main.go
+CONTROLLER_GEN = go run -mod=vendor sigs.k8s.io/controller-tools/cmd/controller-gen
+LISTER_GEN     = go run -mod=vendor k8s.io/code-generator/cmd/lister-gen
+INFORMER_GEN   = go run -mod=vendor k8s.io/code-generator/cmd/informer-gen
+CLIENT_GEN     = go run -mod=vendor k8s.io/code-generator/cmd/client-gen
+CONVERSION_GEN = go run -mod=vendor k8s.io/code-generator/cmd/conversion-gen
 
 empty :=
 space := $(empty) $(empty)
