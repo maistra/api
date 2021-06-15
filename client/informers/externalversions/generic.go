@@ -53,8 +53,6 @@ func (f *genericInformer) Lister() cache.GenericLister {
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
 	// Group=core, Version=v1
-	case v1.SchemeGroupVersion.WithResource("federationstatuses"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Core().V1().FederationStatuses().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("meshfederations"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Core().V1().MeshFederations().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("serviceexports"):
