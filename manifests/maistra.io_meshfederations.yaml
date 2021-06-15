@@ -56,12 +56,6 @@ spec:
               type: string
             security:
               properties:
-                allowDirectInbound:
-                  description: 'AllowDirectInbound determines whether or not external service invocations will be terminated at the ingress gateway. XXX: should this also be configurable per exported service?'
-                  type: boolean
-                allowDirectOutbound:
-                  description: 'AllowDirectOutbound determines whether or not external service invocations will be proxied through and terminated at the egress gateway XXX: should this also be configurable per imported service?'
-                  type: boolean
                 certificateChain:
                   description: 'Name of secret containing certificate chain to be used to validate the remote.  This is also used to validate certificates used by the remote services (both client and server certificates). XXX: maybe this is only used to initiate a connection, with the actual certs stored in the status field, as retrieved from the remote mesh, or maybe this identifies an endpoint used to retrieve a cert chain, a la jwks'
                   type: string

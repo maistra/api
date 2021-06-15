@@ -93,13 +93,13 @@ type MeshFederationSecurity struct {
 	// invocations will be terminated at the ingress gateway.
 	// XXX: should this also be configurable per exported service?
 	// +optional
-	AllowDirectInbound bool `json:"allowDirectInbound,omitempty"`
+	AllowDirectInbound bool `json:"-"`
 
 	// AllowDirectOutbound determines whether or not external service
 	// invocations will be proxied through and terminated at the egress gateway
 	// XXX: should this also be configurable per imported service?
 	// +optional
-	AllowDirectOutbound bool `json:"allowDirectOutbound,omitempty"`
+	AllowDirectOutbound bool `json:"-"`
 }
 
 type MeshFederationGateways struct {
@@ -123,7 +123,7 @@ type MeshFederationSpec struct {
 
 	Gateways MeshFederationGateways `json:"gateways,omitempty"`
 
-	Security *MeshFederationSecurity `json:"security,omitempty"`
+	Security MeshFederationSecurity `json:"security,omitempty"`
 }
 
 // TODO
