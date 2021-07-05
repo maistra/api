@@ -23,6 +23,7 @@ import (
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:resource:categories=maistra-io
+// +groupName=maistra.io
 
 // MeshFederation is the Schema for joining two meshes together.  The resource
 // name will be used to identify the 'cluster' to which imported services

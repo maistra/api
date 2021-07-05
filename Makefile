@@ -1,8 +1,9 @@
-CONTROLLER_GEN = go run -mod=vendor sigs.k8s.io/controller-tools/cmd/controller-gen
-LISTER_GEN     = go run -mod=vendor k8s.io/code-generator/cmd/lister-gen
-INFORMER_GEN   = go run -mod=vendor k8s.io/code-generator/cmd/informer-gen
-CLIENT_GEN     = go run -mod=vendor k8s.io/code-generator/cmd/client-gen
-CONVERSION_GEN = go run -mod=vendor k8s.io/code-generator/cmd/conversion-gen
+CONTROLLER_GEN   = go run -mod=vendor sigs.k8s.io/controller-tools/cmd/controller-gen
+LISTER_GEN       = go run -mod=vendor k8s.io/code-generator/cmd/lister-gen
+INFORMER_GEN     = go run -mod=vendor k8s.io/code-generator/cmd/informer-gen
+CLIENT_GEN       = go run -mod=vendor k8s.io/code-generator/cmd/client-gen
+CONVERSION_GEN   = go run -mod=vendor k8s.io/code-generator/cmd/conversion-gen
+XNS_INFORMER_GEN = go run -mod=vendor github.com/maistra/xns-informer/cmd/xns-informer-gen
 
 empty :=
 space := $(empty) $(empty)
@@ -16,6 +17,7 @@ kube_base_output_package = maistra.io/api
 kube_clientset_package   = $(kube_base_output_package)/client
 kube_listers_package     = $(kube_base_output_package)/client/listers
 kube_informers_package   = $(kube_base_output_package)/client/informers
+xns_informers_package    = $(kube_base_output_package)/client/xnsinformer
 path_apis                = "./core/..."
 header_file              = "header.go.txt"
 plural_exceptions        = ServiceExports:ServiceExports,ServiceImports:ServiceImports
@@ -68,6 +70,10 @@ generate-client:
 	rm -rf client && mv maistra.io/api/client . && rm -rf maistra.io
 	## Hack - Because we are using core, client-gen hardcodes it to /api
 	find client -name core_client.go -exec sed -i 's|config.APIPath = "/api"|config.APIPath = "/apis"|' {} \;
+	## Hack - Because we are not using +groupName=maistra.io in doc.go, the incorrect group is used in fake types
+	find client/versioned/typed/core -name "*.go" -exec sed -i 's|Group: ""|Group: "maistra.io"|' {} \;
+	$(XNS_INFORMER_GEN) --output-base ./ --output-package $(xns_informers_package) --single-directory --input-dirs $(kube_api_packages) --versioned-clientset-package $(kube_clientset_package)/versioned --listers-package $(kube_listers_package) -h $(header_file) --plural-exceptions $(plural_exceptions)
+	rm -rf client/xnsinformer && mv maistra.io/api/client/xnsinformer ./client && rm -rf maistra.io
 
 remove-proto:
 	rm -f ${security_v1_path}/*.gen.go
