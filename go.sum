@@ -295,8 +295,8 @@ github.com/mailru/easyjson v0.0.0-20190312143242-1de009706dbe/go.mod h1:C1wdFJiN
 github.com/mailru/easyjson v0.0.0-20190614124828-94de47d64c63/go.mod h1:C1wdFJiN94OJF2b5HbByQZoLdCWB1Yqtg26g4irojpc=
 github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e/go.mod h1:C1wdFJiN94OJF2b5HbByQZoLdCWB1Yqtg26g4irojpc=
 github.com/mailru/easyjson v0.7.0/go.mod h1:KAzv3t3aY1NaHWoQz1+4F1ccyAH66Jk7yos7ldAVICs=
-github.com/maistra/xns-informer v0.0.0-20210707134232-e172eef21346 h1:uUfne8uWR9ZGBDI+Iuo4B31dTGoSHePHQky4c4TKj1Q=
-github.com/maistra/xns-informer v0.0.0-20210707134232-e172eef21346/go.mod h1:mAVEe73Fzo6pOw6rqohg4mPOSj2aNyO89cA6kl/C0KI=
+github.com/maistra/xns-informer v0.0.0-20210707160032-977ec17e2e0e h1:QqNPrmCUhk8JGyx/Crex7eNWWEFrc07M5v/CQKIwQN0=
+github.com/maistra/xns-informer v0.0.0-20210707160032-977ec17e2e0e/go.mod h1:Bwe3VRiuXlSXu8MktDkmbrFcmSDysxuoOra542o0Ljk=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-colorable v0.1.2 h1:/bC9yWikZXAL9uJdulbSfyVNIR3n3trXl+v8+1sx8mU=
 github.com/mattn/go-colorable v0.1.2/go.mod h1:U0ppj6V5qS13XJ6of8GYAs25YV2eR4EVcfRqFIhoBtE=
@@ -723,8 +723,8 @@ honnef.co/go/tools v0.0.0-20190418001031-e561f6794a2a/go.mod h1:rf3lG4BRIbNafJWh
 honnef.co/go/tools v0.0.0-20190523083050-ea95bdfd59fc/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
 honnef.co/go/tools v0.0.1-2019.2.3/go.mod h1:a3bituU0lyd329TUQxRnasdCoJDkEUEAqEt0JzvZhAg=
 honnef.co/go/tools v0.0.1-2020.1.3/go.mod h1:X/FiERA/W4tHapMX5mGpAtMSVEeEUOyHaw9vFzvIQ3k=
-istio.io/api v0.0.0-20210420211535-1c598ea4139c/go.mod h1:88HN3o1fSD1jo+Z1WTLlJfMm9biopur6Ct9BFKjiB64=
-istio.io/client-go v1.9.4/go.mod h1:LZ8ZCa52HrZIiNbVbK0wC0Xf+Bc5dXbIwyk5izXe/9M=
+istio.io/api v0.0.0-20210503211644-902e709f95c4/go.mod h1:88HN3o1fSD1jo+Z1WTLlJfMm9biopur6Ct9BFKjiB64=
+istio.io/client-go v0.0.0-20210503213042-e6eb157f0d81/go.mod h1:LAkylvGs/+IEUnUXfYqMS5y0lLx45ruBTds327AdmIQ=
 istio.io/gogo-genproto v0.0.0-20190930162913-45029607206a/go.mod h1:OzpAts7jljZceG4Vqi5/zXy/pOg1b209T3jb7Nv5wIs=
 k8s.io/api v0.18.2/go.mod h1:SJCWI7OLzhZSvbY7U8zwNl9UA4o1fizoug34OV/2r78=
 k8s.io/api v0.18.6/go.mod h1:eeyxr+cwCjMdLAmr2W3RyDI0VvTawSg/3RFFBEnmZGI=

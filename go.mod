@@ -6,7 +6,7 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/gogo/protobuf v1.3.1
 	github.com/google/go-cmp v0.5.2
-	github.com/maistra/xns-informer v0.0.0-20210707134232-e172eef21346
+	github.com/maistra/xns-informer v0.0.0-20210707160032-977ec17e2e0e
 	google.golang.org/grpc v1.28.1
 	k8s.io/api v0.20.1
 	k8s.io/apimachinery v0.20.1

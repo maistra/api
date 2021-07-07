@@ -43,7 +43,7 @@ github.com/imdario/mergo
 github.com/inconshreveable/mousetrap
 # github.com/json-iterator/go v1.1.10
 github.com/json-iterator/go
-# github.com/maistra/xns-informer v0.0.0-20210707134232-e172eef21346
+# github.com/maistra/xns-informer v0.0.0-20210707160032-977ec17e2e0e
 ## explicit
 github.com/maistra/xns-informer/cmd/xns-informer-gen
 github.com/maistra/xns-informer/cmd/xns-informer-gen/args
