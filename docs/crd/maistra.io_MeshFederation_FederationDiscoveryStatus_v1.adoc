@@ -1,0 +1,133 @@
+
+
+= FederationDiscoveryStatus
+
+:toc: right
+
+Used by link:maistra.io_MeshFederation_v1.adoc[MeshFederation(maistra.io/v1)]
+
+maistra.io/api/core/v1
+
+FederationDiscoveryStatus provides details about the discovery status of each pilot/istiod instance in the mesh.  This is separated into lists of active and inactive pods.  Active pods will all have their watch.connected value set to true.
+
+.Table FederationDiscoveryStatus Fields
+|===
+| Name | Description | Type
+
+| active
+| Active represents the pilot/istiod pods actively watching the other mesh for discovery.
+| []<<FederationPodDiscoveryStatus>>
+
+| inactive
+| Inactive represents the pilot/istiod pods not actively watching the other mesh for discovery.
+| []<<FederationPodDiscoveryStatus>>
+
+|===
+
+
+[#FederationPodDiscoveryStatus]
+== FederationPodDiscoveryStatus
+
+maistra.io/api/core/v1
+
+FederationPodDiscoveryStatus provides discovery details related to a specific pilot/istiod pod.
+
+.Table FederationPodDiscoveryStatus Fields
+|===
+| Name | Description | Type
+
+| remotes
+| Remotes represents details related to the inbound connections from remote meshes.
+| []<<DiscoveryRemoteStatus>>
+
+| watch
+| Watch represents details related to the outbound connection to the remote mesh.
+| <<DiscoveryWatchStatus>>
+
+| pod
+| Pod is the pod name to which these details apply.  This maps to a a pilot/istiod pod.
+| string
+
+|===
+
+
+[#DiscoveryRemoteStatus]
+== DiscoveryRemoteStatus
+
+maistra.io/api/core/v1
+
+DiscoveryRemoteStatus represents details related to an inbound connection from a remote mesh.
+
+.Table DiscoveryRemoteStatus Fields
+|===
+| Name | Description | Type
+
+| connected
+| Connected identfies an active connection with the remote mesh.
+| boolean
+
+| lastConnected
+| LastConnected represents the last time a connection with the remote mesh was successful.
+| <<metav1_Time>>
+
+| lastDisconnect
+| LastDisconnect represents the last time the connection with the remote mesh was disconnected.
+| <<metav1_Time>>
+
+| lastDisconnectStatus
+| LastDisconnectStatus is the status returned the last time the connection with the remote mesh was terminated.
+| string
+
+| lastEvent
+| LastEvent represents the last time an event was received from the remote mesh.
+| <<metav1_Time>>
+
+| lastFullSync
+| LastFullSync represents the last time a full sync was performed with the remote mesh.
+| <<metav1_Time>>
+
+| source
+| Source represents the source of the remote watch.
+| string
+
+|===
+
+
+[#DiscoveryWatchStatus]
+== DiscoveryWatchStatus
+
+maistra.io/api/core/v1
+
+DiscoveryWatchStatus represents details related to the outbound connection to the remote mesh.
+
+.Table DiscoveryWatchStatus Fields
+|===
+| Name | Description | Type
+
+| connected
+| Connected identfies an active connection with the remote mesh.
+| boolean
+
+| lastConnected
+| LastConnected represents the last time a connection with the remote mesh was successful.
+| <<metav1_Time>>
+
+| lastDisconnect
+| LastDisconnect represents the last time the connection with the remote mesh was disconnected.
+| <<metav1_Time>>
+
+| lastDisconnectStatus
+| LastDisconnectStatus is the status returned the last time the connection with the remote mesh was terminated.
+| string
+
+| lastEvent
+| LastEvent represents the last time an event was received from the remote mesh.
+| <<metav1_Time>>
+
+| lastFullSync
+| LastFullSync represents the last time a full sync was performed with the remote mesh.
+| <<metav1_Time>>
+
+|===
+
+
