@@ -1,0 +1,29 @@
+
+
+= ServiceImportLocality
+
+:toc: right
+
+Used by link:maistra.io_ServiceImports_v1.adoc[ServiceImports(maistra.io/v1)]
+
+maistra.io/api/core/v1
+
+.Table ServiceImportLocality Fields
+|===
+| Name | Description | Type
+
+| region
+| Region within which imported services are located.
+| string
+
+| subzone
+| Subzone within which imported services are located.  If Subzone is specified, Zone must also be specified.
+| string
+
+| zone
+| Zone within which imported services are located.  If Zone is specified, Region must also be specified.
+| string
+
+|===
+
+

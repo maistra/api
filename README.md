@@ -2,6 +2,10 @@
 
 This repository contains Go API, Kubernetes CRD's and a Go client for dealing with Maistra objects.
 
+## Documentation
+
+Refer to the [API documentation](docs/crd/CRDS.adoc) to learn more about the role of each resource. 
+
 ## Tree hierarchy
 
 ### API
@@ -19,7 +23,7 @@ The API itself is contained in these directories, with a version (e.g. `v1` or `
  - `core/v2`: Contains the following types:
    - `ServiceMeshControlPlane`.
 
-### CRD's
+### CRDs
  - `manifests`: Holds the CRD `yaml` files for Maistra types.
 
 ### Go client

@@ -3,6 +3,7 @@ LISTER_GEN       = go run -mod=vendor k8s.io/code-generator/cmd/lister-gen
 INFORMER_GEN     = go run -mod=vendor k8s.io/code-generator/cmd/informer-gen
 CLIENT_GEN       = go run -mod=vendor k8s.io/code-generator/cmd/client-gen
 CONVERSION_GEN   = go run -mod=vendor k8s.io/code-generator/cmd/conversion-gen
+DOC_GEN          = go run -mod=vendor ./tools/cmd/doc
 XNS_INFORMER_GEN = go run -mod=vendor github.com/maistra/xns-informer/cmd/xns-informer-gen
 
 empty :=
@@ -55,9 +56,15 @@ security_v1_path := security/v1
 security_v1_protos := $(wildcard $(security_v1_path)/*.proto)
 security_v1_pb_gos := $(security_v1_protos:.proto=.pb.go)
 
+docs_path := docs/crd
+
 generate-crd:
 	$(CONTROLLER_GEN) crd:preserveUnknownFields=false,crdVersions=v1beta1 paths=$(path_apis) output:dir=./manifests/
 	sed -i -e '/---/d' ./manifests/maistra.io_*.yaml
+
+generate-docs:
+	rm -rf $(docs_path)
+	$(DOC_GEN) paths=maistra.io/api/core/... output:dir=$(docs_path) doc:format=adoc,depth=2
 
 generate-copy:
 	$(CONTROLLER_GEN) object:headerFile=$(header_file) paths=$(path_apis)
@@ -95,7 +102,7 @@ clean:
 	find core -name zz_generated.deepcopy.go -delete -o -name conversion_generated.go -delete
 
 all: gen
-gen: generate-copy generate-client generate-crd generate-conversion generate-proto
+gen: generate-copy generate-client generate-crd generate-conversion generate-proto generate-docs
 	go mod tidy
 	go mod vendor
 
