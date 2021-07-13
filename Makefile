@@ -22,7 +22,7 @@ kube_informers_package   = $(kube_base_output_package)/client/informers
 xns_informers_package    = $(kube_base_output_package)/client/xnsinformer
 path_apis                = "./core/...;./federation/..."
 header_file              = "header.go.txt"
-plural_exceptions        = ServiceExports:ServiceExports,ServiceImports:ServiceImports
+plural_exceptions        = ExportedServices:ExportedServices,ImportedServices:ImportedServices
 
 # protobuf
 out_path = /tmp

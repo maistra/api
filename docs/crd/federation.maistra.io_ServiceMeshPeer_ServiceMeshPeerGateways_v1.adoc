@@ -1,0 +1,25 @@
+
+
+= ServiceMeshPeerGateways
+
+:toc: right
+
+Used by link:federation.maistra.io_ServiceMeshPeer_v1.adoc[ServiceMeshPeer(federation.maistra.io/v1)]
+
+maistra.io/api/federation/v1
+
+.Table ServiceMeshPeerGateways Fields
+|===
+| Name | Description | Type
+
+| egress
+| Gateway through which outbound federated service traffic will travel. This is not required if AllowDirectOutbound is set to true.
+| <<corev1_LocalObjectReference>>
+
+| ingress
+| Gateway through which inbound federated service traffic will travel.
+| <<corev1_LocalObjectReference>>
+
+|===
+
+

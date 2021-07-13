@@ -1,0 +1,69 @@
+
+
+= ExportedServiceSet - federation.maistra.io/v1
+
+:toc: right
+
+maistra.io/api/federation/v1
+
+ExportedServiceSet is the Schema for configuring exported services.  The name of the ExportedServiceSet resource must match the name of a ServiceMeshPeer resource defining the remote mesh to which the services will be exported.
+
+.Table ExportedServiceSet Fields
+|===
+| Name | Description | Type
+
+| apiVersion
+| APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+| string
+
+| kind
+| Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+| string
+
+| metadata
+| 
+| <<metav1_ObjectMeta>>
+
+| spec
+| Spec defines rules for matching services to be exported.
+| <<ExportedServiceSetSpec>>
+
+| status
+| 
+| <<ExportedServiceSetStatus>>
+
+|===
+
+
+[#ExportedServiceSetSpec]
+== ExportedServiceSetSpec
+
+maistra.io/api/federation/v1
+
+.Table ExportedServiceSetSpec Fields
+|===
+| Name | Description | Type
+
+| exportRules
+| ExportRules are the rules that determine which services are exported from the mesh.  The list is processed in order and the first spec in the list that applies to a service is the one that will be applied.  This allows more specific selectors to be placed before more general selectors.
+| []ExportedServiceRule
+
+|===
+
+
+[#ExportedServiceSetStatus]
+== ExportedServiceSetStatus
+
+maistra.io/api/federation/v1
+
+.Table ExportedServiceSetStatus Fields
+|===
+| Name | Description | Type
+
+| exportedServices
+| Exports provides details about the services exported by this mesh.
+| []PeerServiceMapping
+
+|===
+
+
