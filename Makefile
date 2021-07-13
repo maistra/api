@@ -12,14 +12,15 @@ space := $(empty) $(empty)
 kube_api_packages = $(subst $(space),$(empty), \
 	$(kube_base_output_package)/core/v1, \
 	$(kube_base_output_package)/core/v1alpha1, \
-	$(kube_base_output_package)/core/v2 \
+	$(kube_base_output_package)/core/v2, \
+	$(kube_base_output_package)/federation/v1 \
 	)
 kube_base_output_package = maistra.io/api
 kube_clientset_package   = $(kube_base_output_package)/client
 kube_listers_package     = $(kube_base_output_package)/client/listers
 kube_informers_package   = $(kube_base_output_package)/client/informers
 xns_informers_package    = $(kube_base_output_package)/client/xnsinformer
-path_apis                = "./core/..."
+path_apis                = "./core/...;./federation/..."
 header_file              = "header.go.txt"
 plural_exceptions        = ServiceExports:ServiceExports,ServiceImports:ServiceImports
 
@@ -64,7 +65,7 @@ generate-crd:
 
 generate-docs:
 	rm -rf $(docs_path)
-	$(DOC_GEN) paths=maistra.io/api/core/... output:dir=$(docs_path) doc:format=adoc,depth=2
+	$(DOC_GEN) paths="maistra.io/api/core/...;maistra.io/api/federation/..." output:dir=$(docs_path) doc:format=adoc,depth=2
 
 generate-copy:
 	$(CONTROLLER_GEN) object:headerFile=$(header_file) paths=$(path_apis)
@@ -100,6 +101,7 @@ generate-conversion:
 clean:
 	rm -rf client manifests
 	find core -name zz_generated.deepcopy.go -delete -o -name conversion_generated.go -delete
+	find federation -name zz_generated.deepcopy.go -delete -o -name conversion_generated.go -delete
 
 all: gen
 gen: generate-copy generate-client generate-crd generate-conversion generate-proto generate-docs
@@ -112,4 +114,4 @@ check-clean-repo:
 	@if [[ -n $$(git status --porcelain) ]]; then echo -e "ERROR: Some files need to be updated, run 'make gen' and include any changed files in your PR. Output:\n"; git status; git diff; exit 1; fi
 
 test:
-	go test -race $(path_apis)
+	go test -race ./core/... ./federation/...
