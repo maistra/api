@@ -1,0 +1,29 @@
+
+
+= ServiceMeshPeerSecurity
+
+:toc: right
+
+Used by link:federation.maistra.io_ServiceMeshPeer_v1.adoc[ServiceMeshPeer(federation.maistra.io/v1)]
+
+maistra.io/api/federation/v1
+
+.Table ServiceMeshPeerSecurity Fields
+|===
+| Name | Description | Type
+
+| certificateChain
+| Name of ConfigMap containing certificate chain to be used to validate the remote.  This is also used to validate certificates used by the remote services (both client and server certificates).  The name of the entry should be root-cert.pem.  If unspecified, it will look for a ConfigMap named <meshfederation-name>-ca-root-cert, e.g. if this resource is named mesh1, it will look for a ConfigMap named mesh1-ca-root-cert.
+| <<corev1_TypedLocalObjectReference>>
+
+| clientID
+| ClientID of the remote mesh.  This is used to authenticate incoming requrests from the remote mesh's discovery client.
+| string
+
+| trustDomain
+| TrustDomain of remote mesh.
+| string
+
+|===
+
+

@@ -24,9 +24,6 @@ import (
 
 type CoreV1Interface interface {
 	RESTClient() rest.Interface
-	MeshFederationsGetter
-	ServiceExportsGetter
-	ServiceImportsGetter
 	ServiceMeshControlPlanesGetter
 	ServiceMeshExtensionsGetter
 	ServiceMeshMembersGetter
@@ -36,18 +33,6 @@ type CoreV1Interface interface {
 // CoreV1Client is used to interact with features provided by the  group.
 type CoreV1Client struct {
 	restClient rest.Interface
-}
-
-func (c *CoreV1Client) MeshFederations(namespace string) MeshFederationInterface {
-	return newMeshFederations(c, namespace)
-}
-
-func (c *CoreV1Client) ServiceExports(namespace string) ServiceExportsInterface {
-	return newServiceExports(c, namespace)
-}
-
-func (c *CoreV1Client) ServiceImports(namespace string) ServiceImportsInterface {
-	return newServiceImports(c, namespace)
 }
 
 func (c *CoreV1Client) ServiceMeshControlPlanes(namespace string) ServiceMeshControlPlaneInterface {

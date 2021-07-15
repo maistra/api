@@ -1,0 +1,81 @@
+
+
+= ServiceMeshPeer - federation.maistra.io/v1
+
+:toc: right
+
+maistra.io/api/federation/v1
+
+ServiceMeshPeer is the Schema for joining two meshes together.  The resource name will be used to identify the 'cluster' to which imported services belong.
+
+.Table ServiceMeshPeer Fields
+|===
+| Name | Description | Type
+
+| apiVersion
+| APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+| string
+
+| kind
+| Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+| string
+
+| metadata
+| 
+| <<metav1_ObjectMeta>>
+
+| spec
+| 
+| <<ServiceMeshPeerSpec>>
+
+| status
+| 
+| <<ServiceMeshPeerStatus>>
+
+|===
+
+
+[#ServiceMeshPeerSpec]
+== ServiceMeshPeerSpec
+
+maistra.io/api/federation/v1
+
+ServiceMeshPeerSpec configures details required to support federation with another service mesh.
+
+.Table ServiceMeshPeerSpec Fields
+|===
+| Name | Description | Type
+
+| gateways
+| Gateways configures the gateways used to facilitate ingress and egress with the other mesh.
+| link:federation.maistra.io_ServiceMeshPeer_ServiceMeshPeerGateways_v1.adoc[ServiceMeshPeerGateways]
+
+| remote
+| Remote configures details related to the remote mesh with which this mesh is federating.
+| link:federation.maistra.io_ServiceMeshPeer_ServiceMeshPeerRemote_v1.adoc[ServiceMeshPeerRemote]
+
+| security
+| Security configures details for securing communication with the other mesh.
+| link:federation.maistra.io_ServiceMeshPeer_ServiceMeshPeerSecurity_v1.adoc[ServiceMeshPeerSecurity]
+
+|===
+
+
+[#ServiceMeshPeerStatus]
+== ServiceMeshPeerStatus
+
+maistra.io/api/federation/v1
+
+ServiceMeshPeerStatus provides information related to the other mesh.
+
+.Table ServiceMeshPeerStatus Fields
+|===
+| Name | Description | Type
+
+| discoveryStatus
+| DiscoveryStatus represents the discovery status of each pilot/istiod pod in the mesh.
+| link:federation.maistra.io_ServiceMeshPeer_ServiceMeshPeerDiscoveryStatus_v1.adoc[ServiceMeshPeerDiscoveryStatus]
+
+|===
+
+

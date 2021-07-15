@@ -10,12 +10,6 @@ link:maistra.io_ServiceMeshControlPlane_v2.adoc[ServiceMeshControlPlane]:: Servi
 
 === v1
 
-link:maistra.io_MeshFederation_v1.adoc[MeshFederation]:: MeshFederation is the Schema for joining two meshes together.  The resource name will be used to identify the 'cluster' to which imported services belong.
-
-link:maistra.io_ServiceExports_v1.adoc[ServiceExports]:: ServiceExport is the Schema for configuring exported services.  The name of the ServiceExports resource must match the name of a MeshFederation resource defining the remote mesh to which the services will be exported.
-
-link:maistra.io_ServiceImports_v1.adoc[ServiceImports]:: ServiceImports is the Schema for configuring imported services.  The name of the ServiceImports resource must match the name of a MeshFederation resource defining the remote mesh from which the services will be imported.
-
 link:maistra.io_ServiceMeshControlPlane_v1.adoc[ServiceMeshControlPlane]:: ServiceMeshControlPlane represents a deployment of the service mesh control plane. The control plane components are deployed in the namespace in which the ServiceMeshControlPlane resides. The configuration options for the components that comprise the control plane are specified in this object.
 
 link:maistra.io_ServiceMeshExtension_v1.adoc[ServiceMeshExtension]:: ServiceMeshExtension is the Schema for the servicemeshextensions API
@@ -29,4 +23,14 @@ link:maistra.io_ServiceMeshMemberRoll_v1.adoc[ServiceMeshMemberRoll]:: The Servi
 === v1alpha1
 
 link:maistra.io_ServiceMeshExtension_v1alpha1.adoc[ServiceMeshExtension]:: ServiceMeshExtension is the Schema for the servicemeshextensions API
+
+== federation.maistra.io
+
+=== v1
+
+link:federation.maistra.io_ExportedServiceSet_v1.adoc[ExportedServiceSet]:: ExportedServiceSet is the Schema for configuring exported services.  The name of the ExportedServiceSet resource must match the name of a ServiceMeshPeer resource defining the remote mesh to which the services will be exported.
+
+link:federation.maistra.io_ImportedServiceSet_v1.adoc[ImportedServiceSet]:: ImportedServiceSet is the Schema for configuring imported services.  The name of the ImportedServiceSet resource must match the name of a ServiceMeshPeer resource defining the remote mesh from which the services will be imported.
+
+link:federation.maistra.io_ServiceMeshPeer_v1.adoc[ServiceMeshPeer]:: ServiceMeshPeer is the Schema for joining two meshes together.  The resource name will be used to identify the 'cluster' to which imported services belong.
 

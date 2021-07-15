@@ -26,18 +26,6 @@ type FakeCoreV1 struct {
 	*testing.Fake
 }
 
-func (c *FakeCoreV1) MeshFederations(namespace string) v1.MeshFederationInterface {
-	return &FakeMeshFederations{c, namespace}
-}
-
-func (c *FakeCoreV1) ServiceExports(namespace string) v1.ServiceExportsInterface {
-	return &FakeServiceExports{c, namespace}
-}
-
-func (c *FakeCoreV1) ServiceImports(namespace string) v1.ServiceImportsInterface {
-	return &FakeServiceImports{c, namespace}
-}
-
 func (c *FakeCoreV1) ServiceMeshControlPlanes(namespace string) v1.ServiceMeshControlPlaneInterface {
 	return &FakeServiceMeshControlPlanes{c, namespace}
 }

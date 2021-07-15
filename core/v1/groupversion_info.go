@@ -46,8 +46,5 @@ func init() {
 		&ServiceMeshControlPlane{}, &ServiceMeshControlPlaneList{},
 		&ServiceMeshMember{}, &ServiceMeshMemberList{},
 		&ServiceMeshMemberRoll{}, &ServiceMeshMemberRollList{},
-		&MeshFederation{}, &MeshFederationList{},
-		&ServiceExports{}, &ServiceExportsList{},
-		&ServiceImports{}, &ServiceImportsList{},
 	)
 }
