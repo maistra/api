@@ -72,6 +72,10 @@ ServiceMeshPeerStatus provides information related to the other mesh.
 |===
 | Name | Description | Type
 
+| conditions
+| Represents the latest available observations of a federation's current state.
+| []Condition
+
 | discoveryStatus
 | DiscoveryStatus represents the discovery status of each pilot/istiod pod in the mesh.
 | link:federation.maistra.io_ServiceMeshPeer_ServiceMeshPeerDiscoveryStatus_v1.adoc[ServiceMeshPeerDiscoveryStatus]

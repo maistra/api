@@ -120,6 +120,7 @@ type ServiceMeshPeerRemote struct {
 
 // ServiceMeshPeerStatus provides information related to the other mesh.
 type ServiceMeshPeerStatus struct {
+	StatusConditions `json:",inline"`
 	// DiscoveryStatus represents the discovery status of each pilot/istiod pod
 	// in the mesh.
 	// +optional

@@ -68,6 +68,10 @@ maistra.io/api/federation/v1
 |===
 | Name | Description | Type
 
+| conditions
+| Represents the latest available observations of a federation's current state.
+| []Condition
+
 | importedServices
 | Imports provides details about the services imported by this mesh.
 | []PeerServiceMapping

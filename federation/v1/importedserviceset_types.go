@@ -98,6 +98,7 @@ type ImportedServiceLocality struct {
 }
 
 type ImportedServiceSetStatus struct {
+	StatusConditions `json:",inline"`
 	// Imports provides details about the services imported by this mesh.
 	// +required
 	// +listType=map
