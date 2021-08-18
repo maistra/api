@@ -100,6 +100,32 @@ spec:
         status:
           description: ServiceMeshPeerStatus provides information related to the other mesh.
           properties:
+            conditions:
+              description: Represents the latest available observations of a federation's current state.
+              items:
+                description: Condition describes the state of a federation at a certain point.
+                properties:
+                  lastTransitionTime:
+                    description: Last time the condition transitioned from one status to another.
+                    format: date-time
+                    type: string
+                  message:
+                    description: A human readable message indicating details about the transition.
+                    type: string
+                  reason:
+                    description: The reason for the condition's last transition.
+                    type: string
+                  status:
+                    description: Status of the condition, one of True, False, Unknown.
+                    type: string
+                  type:
+                    description: Type of federation condition.
+                    type: string
+                required:
+                - status
+                - type
+                type: object
+              type: array
             discoveryStatus:
               description: DiscoveryStatus represents the discovery status of each pilot/istiod pod in the mesh.
               properties:

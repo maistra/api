@@ -60,6 +60,10 @@ maistra.io/api/federation/v1
 |===
 | Name | Description | Type
 
+| conditions
+| Represents the latest available observations of a federation's current state.
+| []Condition
+
 | exportedServices
 | Exports provides details about the services exported by this mesh.
 | []PeerServiceMapping
