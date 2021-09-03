@@ -99,16 +99,16 @@ generate-conversion:
 	mv maistra.io/api/core/v1alpha1/* core/v1alpha1/ && rm -rf maistra.io
 
 clean:
-	rm -rf client manifests
+	rm -rf client manifests/*.yaml
 	find core -name zz_generated.deepcopy.go -delete -o -name conversion_generated.go -delete
 	find federation -name zz_generated.deepcopy.go -delete -o -name conversion_generated.go -delete
 
 all: gen
-gen: generate-copy generate-client generate-crd generate-conversion generate-proto generate-docs
+gen: clean generate-copy generate-client generate-crd generate-conversion generate-proto generate-docs
 	go mod tidy
 	go mod vendor
 
-gen-check: clean gen check-clean-repo
+gen-check: gen check-clean-repo
 
 check-clean-repo:
 	@if [[ -n $$(git status --porcelain) ]]; then echo -e "ERROR: Some files need to be updated, run 'make gen' and include any changed files in your PR. Output:\n"; git status; git diff; exit 1; fi
