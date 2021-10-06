@@ -77,7 +77,7 @@ type ImportedServiceRule struct {
 	// workloads associated with the service.  This setting overrides DomainSuffix.
 	// +optional
 	ImportAsLocal bool `json:"importAsLocal,omitempty"`
-	// Type of rule.  Only Name type is supported.
+	// Type of rule.  Only NameSelector type is supported.
 	// +required
 	Type ServiceImportExportSelectorType `json:"type"`
 	// NameSelector provides a simple name matcher for importing services in

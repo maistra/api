@@ -105,7 +105,7 @@ spec:
                           type: string
                       type: object
                     type:
-                      description: Type of rule.  One of Name or Label.
+                      description: Type of rule.  One of NameSelector or LabelSelector.
                       type: string
                   required:
                   - type

@@ -54,7 +54,7 @@ type ExportedServiceSetSpec struct {
 }
 
 type ExportedServiceRule struct {
-	// Type of rule.  One of Name or Label.
+	// Type of rule.  One of NameSelector or LabelSelector.
 	// +required
 	Type ServiceImportExportSelectorType `json:"type"`
 	// LabelSelector provides a mechanism for selecting services to export by
