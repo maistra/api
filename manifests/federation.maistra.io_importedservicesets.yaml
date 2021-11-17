@@ -60,7 +60,7 @@ spec:
                           type: string
                       type: object
                     type:
-                      description: Type of rule.  Only Name type is supported.
+                      description: Type of rule.  Only NameSelector type is supported.
                       type: string
                   required:
                   - type
