@@ -13,7 +13,7 @@ maistra.io/api/federation/v1
 | Name | Description | Type
 
 | egress
-| Gateway through which outbound federated service traffic will travel. This is not required if AllowDirectOutbound is set to true.
+| Gateway through which outbound federated service traffic will travel.
 | <<corev1_LocalObjectReference>>
 
 | ingress

@@ -23,9 +23,11 @@ import (
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// ExportedServiceSet is the Schema for configuring exported services.  The name of
-// the ExportedServiceSet resource must match the name of a ServiceMeshPeer resource
-// defining the remote mesh to which the services will be exported.
+// ExportedServiceSet is the Schema for configuring exported services. It must be created
+// in the same namespace as the control plane. The name of the ExportedServiceSet
+// resource must match the name of a ServiceMeshPeer resource defining the remote mesh
+// to which the services will be exported. This implies there will be at most one
+// ExportedServiceSet resource per peer and control plane.
 type ExportedServiceSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
