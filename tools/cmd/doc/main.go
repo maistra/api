@@ -5,12 +5,9 @@ import (
 
 	"github.com/spf13/pflag"
 	"maistra.io/api/tools/pkg/doc"
-	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
 	"sigs.k8s.io/controller-tools/pkg/genall"
 	"sigs.k8s.io/controller-tools/pkg/markers"
 )
-
-var log = logf.Log.WithName("cmd")
 
 // optionsRegistry contains all the marker definitions used to process command line options
 var optionsRegistry = &markers.Registry{}
