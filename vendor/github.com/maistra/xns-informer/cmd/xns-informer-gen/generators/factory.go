@@ -140,7 +140,7 @@ func WithTweakListOptions(tweakListOptions internalinterfaces.TweakListOptionsFu
 // WithNamespaces limits the SharedInformerFactory to the specified namespaces.
 func WithNamespaces(namespaces ...string) SharedInformerOption {
 	return func(factory *sharedInformerFactory) *sharedInformerFactory {
-        factory.SetNamespaces(namespaces...)
+        factory.SetNamespaces(namespaces)
 		return factory
 	}
 }
@@ -170,11 +170,11 @@ func NewSharedInformerFactoryWithOptions(client {{.clientSetInterface|raw}}, def
 }
 
 // SetNamespaces updates the set of namespaces for all current and future informers.
-func (f *sharedInformerFactory) SetNamespaces(namespaces ...string) {
+func (f *sharedInformerFactory) SetNamespaces(namespaces []string) {
     f.lock.Lock()
     defer f.lock.Unlock()
 
-    f.namespaces.SetNamespaces(namespaces...)
+    f.namespaces.SetNamespaces(namespaces)
 }
 
 // Start initializes all requested informers.
@@ -242,7 +242,7 @@ var sharedInformerFactoryInterface = `
 // API group versions.
 type SharedInformerFactory interface {
 	{{.informerFactoryInterface|raw}}
-    SetNamespaces(namespaces ...string)
+    SetNamespaces(namespaces []string)
 	ForResource(resource {{.schemaGroupVersionResource|raw}}) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
