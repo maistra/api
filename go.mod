@@ -2,13 +2,11 @@ module maistra.io/api
 
 go 1.15
 
-replace github.com/maistra/xns-informer => github.com/luksa/xns-informer v0.0.0-20220204100742-3436f0ac2527
-
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/gogo/protobuf v1.3.2
 	github.com/google/go-cmp v0.5.6
-	github.com/maistra/xns-informer v0.0.0-20210707160032-977ec17e2e0e
+	github.com/maistra/xns-informer v0.0.0-20220301142458-d7b9519d1378
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/pflag v1.0.5
 	google.golang.org/grpc v1.42.0
