@@ -60,7 +60,7 @@ security_v1_pb_gos := $(security_v1_protos:.proto=.pb.go)
 docs_path := docs/crd
 
 generate-crd:
-	$(CONTROLLER_GEN) crd:preserveUnknownFields=false,crdVersions=v1 paths=$(path_apis) output:dir=./manifests/
+	$(CONTROLLER_GEN) crd:crdVersions=v1 paths=$(path_apis) output:dir=./manifests/
 	sed -i -e '/---/d' ./manifests/maistra.io_*.yaml ./manifests/federation.maistra.io_*.yaml
 
 generate-docs:
