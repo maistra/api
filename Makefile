@@ -1,10 +1,10 @@
-CONTROLLER_GEN   = go run -mod=vendor sigs.k8s.io/controller-tools/cmd/controller-gen
-LISTER_GEN       = go run -mod=vendor k8s.io/code-generator/cmd/lister-gen
-INFORMER_GEN     = go run -mod=vendor k8s.io/code-generator/cmd/informer-gen
-CLIENT_GEN       = go run -mod=vendor k8s.io/code-generator/cmd/client-gen
-CONVERSION_GEN   = go run -mod=vendor k8s.io/code-generator/cmd/conversion-gen
-DOC_GEN          = go run -mod=vendor ./tools/cmd/doc
-XNS_INFORMER_GEN = go run -mod=vendor github.com/maistra/xns-informer/cmd/xns-informer-gen
+CONTROLLER_GEN   = go run sigs.k8s.io/controller-tools/cmd/controller-gen
+LISTER_GEN       = go run k8s.io/code-generator/cmd/lister-gen
+INFORMER_GEN     = go run k8s.io/code-generator/cmd/informer-gen
+CLIENT_GEN       = go run k8s.io/code-generator/cmd/client-gen
+CONVERSION_GEN   = go run k8s.io/code-generator/cmd/conversion-gen
+DOC_GEN          = go run ./tools/cmd/doc
+XNS_INFORMER_GEN = go run github.com/maistra/xns-informer/cmd/xns-informer-gen
 
 empty :=
 space := $(empty) $(empty)
