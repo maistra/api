@@ -34,7 +34,7 @@ func GetManifestsByName() (map[string][]byte, error) {
 		name := entry.Name()
 		content, err := ReadManifest(name)
 		if err != nil {
-			return manifestsByName, err
+			return nil, err
 		}
 		manifestsByName[name] = content
 	}
