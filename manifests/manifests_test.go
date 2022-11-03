@@ -1,13 +1,12 @@
-package manifests_test
+package manifests
 
 import (
 	"bytes"
-	"maistra.io/api/manifests"
 	"testing"
 )
 
 func TestGettingManifestDirEntries(t *testing.T) {
-	manifests, err := manifests.GetManifests()
+	manifests, err := GetManifests()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
@@ -17,7 +16,7 @@ func TestGettingManifestDirEntries(t *testing.T) {
 }
 
 func TestGettingManifestsByName(t *testing.T) {
-	manifestsByName, err := manifests.GetManifestsByName()
+	manifestsByName, err := GetManifestsByName()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
@@ -27,7 +26,7 @@ func TestGettingManifestsByName(t *testing.T) {
 }
 
 func TestLoadingManifestByName(t *testing.T) {
-	manifestsByName, err := manifests.GetManifestsByName()
+	manifestsByName, err := GetManifestsByName()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
@@ -36,7 +35,7 @@ func TestLoadingManifestByName(t *testing.T) {
 	}
 	smmYAML := "maistra.io_servicemeshmembers.yaml"
 
-	smmContent, err := manifests.ReadManifest(smmYAML)
+	smmContent, err := ReadManifest(smmYAML)
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
