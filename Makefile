@@ -76,6 +76,7 @@ clean:
 all: gen
 gen: clean generate-copy generate-client generate-crd generate-conversion generate-proto generate-docs
 	go mod tidy
+	go mod vendor
 
 gen-check: gen check-clean-repo
 
