@@ -47,14 +47,16 @@ type serviceMeshMemberInformer struct {
 // NewServiceMeshMemberInformer constructs a new informer for ServiceMeshMember type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewServiceMeshMemberInformer(client versioned.Interface, namespaces informers.NamespaceSet, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
+func NewServiceMeshMemberInformer(client versioned.Interface, namespaces informers.NamespaceSet,
+	resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
 	return NewFilteredServiceMeshMemberInformer(client, namespaces, resyncPeriod, indexers, nil)
 }
 
 // NewFilteredServiceMeshMemberInformer constructs a new informer for ServiceMeshMember type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewFilteredServiceMeshMemberInformer(client versioned.Interface, namespaces informers.NamespaceSet, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+func NewFilteredServiceMeshMemberInformer(client versioned.Interface, namespaces informers.NamespaceSet,
+	resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	newInformer := func(namespace string) cache.SharedIndexInformer {
 		return cache.NewSharedIndexInformer(
 			&cache.ListWatch{
@@ -81,7 +83,8 @@ func NewFilteredServiceMeshMemberInformer(client versioned.Interface, namespaces
 }
 
 func (f *serviceMeshMemberInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
-	return NewFilteredServiceMeshMemberInformer(client, f.namespaces, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
+	return NewFilteredServiceMeshMemberInformer(client, f.namespaces, resyncPeriod,
+		cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 
 func (f *serviceMeshMemberInformer) Informer() cache.SharedIndexInformer {
