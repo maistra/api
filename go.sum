@@ -337,8 +337,8 @@ github.com/mailru/easyjson v0.0.0-20190614124828-94de47d64c63/go.mod h1:C1wdFJiN
 github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e/go.mod h1:C1wdFJiN94OJF2b5HbByQZoLdCWB1Yqtg26g4irojpc=
 github.com/mailru/easyjson v0.7.0/go.mod h1:KAzv3t3aY1NaHWoQz1+4F1ccyAH66Jk7yos7ldAVICs=
 github.com/mailru/easyjson v0.7.6/go.mod h1:xzfreul335JAWq5oZzymOObrkdz5UnU4kGfJJLY9Nlc=
-github.com/maistra/xns-informer v0.0.0-20221007121714-8000c40e5493 h1:FxVGuZ8VKZ0prLPdr6iFIGtkRB3+R7MekFlpTLDwdyc=
-github.com/maistra/xns-informer v0.0.0-20221007121714-8000c40e5493/go.mod h1:0ZUF4kjow/MlN7Gp6OY7w2qBsWSG4MDBNxUp1VSSs/A=
+github.com/maistra/xns-informer v0.0.0-20230111132921-1f7d63a02498 h1:i6IiV3qUfNEZESXueCbEGyHzlMIGoHTC5ZIXOf/tQRM=
+github.com/maistra/xns-informer v0.0.0-20230111132921-1f7d63a02498/go.mod h1:0ZUF4kjow/MlN7Gp6OY7w2qBsWSG4MDBNxUp1VSSs/A=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-colorable v0.1.8 h1:c1ghPdyEDarC70ftn0y+A/Ee++9zz8ljHG1b13eJ0s8=
 github.com/mattn/go-colorable v0.1.8/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope9wVRipJSqc=
