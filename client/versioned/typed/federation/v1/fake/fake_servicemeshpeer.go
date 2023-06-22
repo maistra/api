@@ -19,13 +19,12 @@ package fake
 import (
 	"context"
 
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
-	federationv1 "maistra.io/api/federation/v1"
+	v1 "maistra.io/api/federation/v1"
 )
 
 // FakeServiceMeshPeers implements ServiceMeshPeerInterface
@@ -34,25 +33,25 @@ type FakeServiceMeshPeers struct {
 	ns   string
 }
 
-var servicemeshpeersResource = schema.GroupVersionResource{Group: "federation.maistra.io", Version: "v1", Resource: "servicemeshpeers"}
+var servicemeshpeersResource = v1.SchemeGroupVersion.WithResource("servicemeshpeers")
 
-var servicemeshpeersKind = schema.GroupVersionKind{Group: "federation.maistra.io", Version: "v1", Kind: "ServiceMeshPeer"}
+var servicemeshpeersKind = v1.SchemeGroupVersion.WithKind("ServiceMeshPeer")
 
 // Get takes name of the serviceMeshPeer, and returns the corresponding serviceMeshPeer object, and an error if there is any.
-func (c *FakeServiceMeshPeers) Get(ctx context.Context, name string, options v1.GetOptions) (result *federationv1.ServiceMeshPeer, err error) {
+func (c *FakeServiceMeshPeers) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ServiceMeshPeer, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(servicemeshpeersResource, c.ns, name), &federationv1.ServiceMeshPeer{})
+		Invokes(testing.NewGetAction(servicemeshpeersResource, c.ns, name), &v1.ServiceMeshPeer{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ServiceMeshPeer), err
+	return obj.(*v1.ServiceMeshPeer), err
 }
 
 // List takes label and field selectors, and returns the list of ServiceMeshPeers that match those selectors.
-func (c *FakeServiceMeshPeers) List(ctx context.Context, opts v1.ListOptions) (result *federationv1.ServiceMeshPeerList, err error) {
+func (c *FakeServiceMeshPeers) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ServiceMeshPeerList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(servicemeshpeersResource, servicemeshpeersKind, c.ns, opts), &federationv1.ServiceMeshPeerList{})
+		Invokes(testing.NewListAction(servicemeshpeersResource, servicemeshpeersKind, c.ns, opts), &v1.ServiceMeshPeerList{})
 
 	if obj == nil {
 		return nil, err
@@ -62,8 +61,8 @@ func (c *FakeServiceMeshPeers) List(ctx context.Context, opts v1.ListOptions) (r
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &federationv1.ServiceMeshPeerList{ListMeta: obj.(*federationv1.ServiceMeshPeerList).ListMeta}
-	for _, item := range obj.(*federationv1.ServiceMeshPeerList).Items {
+	list := &v1.ServiceMeshPeerList{ListMeta: obj.(*v1.ServiceMeshPeerList).ListMeta}
+	for _, item := range obj.(*v1.ServiceMeshPeerList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -72,69 +71,69 @@ func (c *FakeServiceMeshPeers) List(ctx context.Context, opts v1.ListOptions) (r
 }
 
 // Watch returns a watch.Interface that watches the requested serviceMeshPeers.
-func (c *FakeServiceMeshPeers) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeServiceMeshPeers) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(servicemeshpeersResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a serviceMeshPeer and creates it.  Returns the server's representation of the serviceMeshPeer, and an error, if there is any.
-func (c *FakeServiceMeshPeers) Create(ctx context.Context, serviceMeshPeer *federationv1.ServiceMeshPeer, opts v1.CreateOptions) (result *federationv1.ServiceMeshPeer, err error) {
+func (c *FakeServiceMeshPeers) Create(ctx context.Context, serviceMeshPeer *v1.ServiceMeshPeer, opts metav1.CreateOptions) (result *v1.ServiceMeshPeer, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(servicemeshpeersResource, c.ns, serviceMeshPeer), &federationv1.ServiceMeshPeer{})
+		Invokes(testing.NewCreateAction(servicemeshpeersResource, c.ns, serviceMeshPeer), &v1.ServiceMeshPeer{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ServiceMeshPeer), err
+	return obj.(*v1.ServiceMeshPeer), err
 }
 
 // Update takes the representation of a serviceMeshPeer and updates it. Returns the server's representation of the serviceMeshPeer, and an error, if there is any.
-func (c *FakeServiceMeshPeers) Update(ctx context.Context, serviceMeshPeer *federationv1.ServiceMeshPeer, opts v1.UpdateOptions) (result *federationv1.ServiceMeshPeer, err error) {
+func (c *FakeServiceMeshPeers) Update(ctx context.Context, serviceMeshPeer *v1.ServiceMeshPeer, opts metav1.UpdateOptions) (result *v1.ServiceMeshPeer, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(servicemeshpeersResource, c.ns, serviceMeshPeer), &federationv1.ServiceMeshPeer{})
+		Invokes(testing.NewUpdateAction(servicemeshpeersResource, c.ns, serviceMeshPeer), &v1.ServiceMeshPeer{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ServiceMeshPeer), err
+	return obj.(*v1.ServiceMeshPeer), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeServiceMeshPeers) UpdateStatus(ctx context.Context, serviceMeshPeer *federationv1.ServiceMeshPeer, opts v1.UpdateOptions) (*federationv1.ServiceMeshPeer, error) {
+func (c *FakeServiceMeshPeers) UpdateStatus(ctx context.Context, serviceMeshPeer *v1.ServiceMeshPeer, opts metav1.UpdateOptions) (*v1.ServiceMeshPeer, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceAction(servicemeshpeersResource, "status", c.ns, serviceMeshPeer), &federationv1.ServiceMeshPeer{})
+		Invokes(testing.NewUpdateSubresourceAction(servicemeshpeersResource, "status", c.ns, serviceMeshPeer), &v1.ServiceMeshPeer{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ServiceMeshPeer), err
+	return obj.(*v1.ServiceMeshPeer), err
 }
 
 // Delete takes name of the serviceMeshPeer and deletes it. Returns an error if one occurs.
-func (c *FakeServiceMeshPeers) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeServiceMeshPeers) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteActionWithOptions(servicemeshpeersResource, c.ns, name, opts), &federationv1.ServiceMeshPeer{})
+		Invokes(testing.NewDeleteActionWithOptions(servicemeshpeersResource, c.ns, name, opts), &v1.ServiceMeshPeer{})
 
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeServiceMeshPeers) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeServiceMeshPeers) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewDeleteCollectionAction(servicemeshpeersResource, c.ns, listOpts)
 
-	_, err := c.Fake.Invokes(action, &federationv1.ServiceMeshPeerList{})
+	_, err := c.Fake.Invokes(action, &v1.ServiceMeshPeerList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched serviceMeshPeer.
-func (c *FakeServiceMeshPeers) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *federationv1.ServiceMeshPeer, err error) {
+func (c *FakeServiceMeshPeers) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ServiceMeshPeer, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(servicemeshpeersResource, c.ns, name, pt, data, subresources...), &federationv1.ServiceMeshPeer{})
+		Invokes(testing.NewPatchSubresourceAction(servicemeshpeersResource, c.ns, name, pt, data, subresources...), &v1.ServiceMeshPeer{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ServiceMeshPeer), err
+	return obj.(*v1.ServiceMeshPeer), err
 }

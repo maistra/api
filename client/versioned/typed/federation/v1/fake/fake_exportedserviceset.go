@@ -19,13 +19,12 @@ package fake
 import (
 	"context"
 
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
-	federationv1 "maistra.io/api/federation/v1"
+	v1 "maistra.io/api/federation/v1"
 )
 
 // FakeExportedServiceSets implements ExportedServiceSetInterface
@@ -34,25 +33,25 @@ type FakeExportedServiceSets struct {
 	ns   string
 }
 
-var exportedservicesetsResource = schema.GroupVersionResource{Group: "federation.maistra.io", Version: "v1", Resource: "exportedservicesets"}
+var exportedservicesetsResource = v1.SchemeGroupVersion.WithResource("exportedservicesets")
 
-var exportedservicesetsKind = schema.GroupVersionKind{Group: "federation.maistra.io", Version: "v1", Kind: "ExportedServiceSet"}
+var exportedservicesetsKind = v1.SchemeGroupVersion.WithKind("ExportedServiceSet")
 
 // Get takes name of the exportedServiceSet, and returns the corresponding exportedServiceSet object, and an error if there is any.
-func (c *FakeExportedServiceSets) Get(ctx context.Context, name string, options v1.GetOptions) (result *federationv1.ExportedServiceSet, err error) {
+func (c *FakeExportedServiceSets) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ExportedServiceSet, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(exportedservicesetsResource, c.ns, name), &federationv1.ExportedServiceSet{})
+		Invokes(testing.NewGetAction(exportedservicesetsResource, c.ns, name), &v1.ExportedServiceSet{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ExportedServiceSet), err
+	return obj.(*v1.ExportedServiceSet), err
 }
 
 // List takes label and field selectors, and returns the list of ExportedServiceSets that match those selectors.
-func (c *FakeExportedServiceSets) List(ctx context.Context, opts v1.ListOptions) (result *federationv1.ExportedServiceSetList, err error) {
+func (c *FakeExportedServiceSets) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ExportedServiceSetList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(exportedservicesetsResource, exportedservicesetsKind, c.ns, opts), &federationv1.ExportedServiceSetList{})
+		Invokes(testing.NewListAction(exportedservicesetsResource, exportedservicesetsKind, c.ns, opts), &v1.ExportedServiceSetList{})
 
 	if obj == nil {
 		return nil, err
@@ -62,8 +61,8 @@ func (c *FakeExportedServiceSets) List(ctx context.Context, opts v1.ListOptions)
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &federationv1.ExportedServiceSetList{ListMeta: obj.(*federationv1.ExportedServiceSetList).ListMeta}
-	for _, item := range obj.(*federationv1.ExportedServiceSetList).Items {
+	list := &v1.ExportedServiceSetList{ListMeta: obj.(*v1.ExportedServiceSetList).ListMeta}
+	for _, item := range obj.(*v1.ExportedServiceSetList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -72,69 +71,69 @@ func (c *FakeExportedServiceSets) List(ctx context.Context, opts v1.ListOptions)
 }
 
 // Watch returns a watch.Interface that watches the requested exportedServiceSets.
-func (c *FakeExportedServiceSets) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeExportedServiceSets) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(exportedservicesetsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a exportedServiceSet and creates it.  Returns the server's representation of the exportedServiceSet, and an error, if there is any.
-func (c *FakeExportedServiceSets) Create(ctx context.Context, exportedServiceSet *federationv1.ExportedServiceSet, opts v1.CreateOptions) (result *federationv1.ExportedServiceSet, err error) {
+func (c *FakeExportedServiceSets) Create(ctx context.Context, exportedServiceSet *v1.ExportedServiceSet, opts metav1.CreateOptions) (result *v1.ExportedServiceSet, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(exportedservicesetsResource, c.ns, exportedServiceSet), &federationv1.ExportedServiceSet{})
+		Invokes(testing.NewCreateAction(exportedservicesetsResource, c.ns, exportedServiceSet), &v1.ExportedServiceSet{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ExportedServiceSet), err
+	return obj.(*v1.ExportedServiceSet), err
 }
 
 // Update takes the representation of a exportedServiceSet and updates it. Returns the server's representation of the exportedServiceSet, and an error, if there is any.
-func (c *FakeExportedServiceSets) Update(ctx context.Context, exportedServiceSet *federationv1.ExportedServiceSet, opts v1.UpdateOptions) (result *federationv1.ExportedServiceSet, err error) {
+func (c *FakeExportedServiceSets) Update(ctx context.Context, exportedServiceSet *v1.ExportedServiceSet, opts metav1.UpdateOptions) (result *v1.ExportedServiceSet, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(exportedservicesetsResource, c.ns, exportedServiceSet), &federationv1.ExportedServiceSet{})
+		Invokes(testing.NewUpdateAction(exportedservicesetsResource, c.ns, exportedServiceSet), &v1.ExportedServiceSet{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ExportedServiceSet), err
+	return obj.(*v1.ExportedServiceSet), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeExportedServiceSets) UpdateStatus(ctx context.Context, exportedServiceSet *federationv1.ExportedServiceSet, opts v1.UpdateOptions) (*federationv1.ExportedServiceSet, error) {
+func (c *FakeExportedServiceSets) UpdateStatus(ctx context.Context, exportedServiceSet *v1.ExportedServiceSet, opts metav1.UpdateOptions) (*v1.ExportedServiceSet, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceAction(exportedservicesetsResource, "status", c.ns, exportedServiceSet), &federationv1.ExportedServiceSet{})
+		Invokes(testing.NewUpdateSubresourceAction(exportedservicesetsResource, "status", c.ns, exportedServiceSet), &v1.ExportedServiceSet{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ExportedServiceSet), err
+	return obj.(*v1.ExportedServiceSet), err
 }
 
 // Delete takes name of the exportedServiceSet and deletes it. Returns an error if one occurs.
-func (c *FakeExportedServiceSets) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeExportedServiceSets) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteActionWithOptions(exportedservicesetsResource, c.ns, name, opts), &federationv1.ExportedServiceSet{})
+		Invokes(testing.NewDeleteActionWithOptions(exportedservicesetsResource, c.ns, name, opts), &v1.ExportedServiceSet{})
 
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeExportedServiceSets) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeExportedServiceSets) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewDeleteCollectionAction(exportedservicesetsResource, c.ns, listOpts)
 
-	_, err := c.Fake.Invokes(action, &federationv1.ExportedServiceSetList{})
+	_, err := c.Fake.Invokes(action, &v1.ExportedServiceSetList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched exportedServiceSet.
-func (c *FakeExportedServiceSets) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *federationv1.ExportedServiceSet, err error) {
+func (c *FakeExportedServiceSets) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ExportedServiceSet, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(exportedservicesetsResource, c.ns, name, pt, data, subresources...), &federationv1.ExportedServiceSet{})
+		Invokes(testing.NewPatchSubresourceAction(exportedservicesetsResource, c.ns, name, pt, data, subresources...), &v1.ExportedServiceSet{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*federationv1.ExportedServiceSet), err
+	return obj.(*v1.ExportedServiceSet), err
 }

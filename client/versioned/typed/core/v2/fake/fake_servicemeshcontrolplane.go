@@ -21,7 +21,6 @@ import (
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -34,9 +33,9 @@ type FakeServiceMeshControlPlanes struct {
 	ns   string
 }
 
-var servicemeshcontrolplanesResource = schema.GroupVersionResource{Group: "maistra.io", Version: "v2", Resource: "servicemeshcontrolplanes"}
+var servicemeshcontrolplanesResource = v2.SchemeGroupVersion.WithResource("servicemeshcontrolplanes")
 
-var servicemeshcontrolplanesKind = schema.GroupVersionKind{Group: "maistra.io", Version: "v2", Kind: "ServiceMeshControlPlane"}
+var servicemeshcontrolplanesKind = v2.SchemeGroupVersion.WithKind("ServiceMeshControlPlane")
 
 // Get takes name of the serviceMeshControlPlane, and returns the corresponding serviceMeshControlPlane object, and an error if there is any.
 func (c *FakeServiceMeshControlPlanes) Get(ctx context.Context, name string, options v1.GetOptions) (result *v2.ServiceMeshControlPlane, err error) {

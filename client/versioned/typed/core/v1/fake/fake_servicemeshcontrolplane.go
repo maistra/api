@@ -19,13 +19,12 @@ package fake
 import (
 	"context"
 
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
-	corev1 "maistra.io/api/core/v1"
+	v1 "maistra.io/api/core/v1"
 )
 
 // FakeServiceMeshControlPlanes implements ServiceMeshControlPlaneInterface
@@ -34,25 +33,25 @@ type FakeServiceMeshControlPlanes struct {
 	ns   string
 }
 
-var servicemeshcontrolplanesResource = schema.GroupVersionResource{Group: "maistra.io", Version: "v1", Resource: "servicemeshcontrolplanes"}
+var servicemeshcontrolplanesResource = v1.SchemeGroupVersion.WithResource("servicemeshcontrolplanes")
 
-var servicemeshcontrolplanesKind = schema.GroupVersionKind{Group: "maistra.io", Version: "v1", Kind: "ServiceMeshControlPlane"}
+var servicemeshcontrolplanesKind = v1.SchemeGroupVersion.WithKind("ServiceMeshControlPlane")
 
 // Get takes name of the serviceMeshControlPlane, and returns the corresponding serviceMeshControlPlane object, and an error if there is any.
-func (c *FakeServiceMeshControlPlanes) Get(ctx context.Context, name string, options v1.GetOptions) (result *corev1.ServiceMeshControlPlane, err error) {
+func (c *FakeServiceMeshControlPlanes) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ServiceMeshControlPlane, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(servicemeshcontrolplanesResource, c.ns, name), &corev1.ServiceMeshControlPlane{})
+		Invokes(testing.NewGetAction(servicemeshcontrolplanesResource, c.ns, name), &v1.ServiceMeshControlPlane{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshControlPlane), err
+	return obj.(*v1.ServiceMeshControlPlane), err
 }
 
 // List takes label and field selectors, and returns the list of ServiceMeshControlPlanes that match those selectors.
-func (c *FakeServiceMeshControlPlanes) List(ctx context.Context, opts v1.ListOptions) (result *corev1.ServiceMeshControlPlaneList, err error) {
+func (c *FakeServiceMeshControlPlanes) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ServiceMeshControlPlaneList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(servicemeshcontrolplanesResource, servicemeshcontrolplanesKind, c.ns, opts), &corev1.ServiceMeshControlPlaneList{})
+		Invokes(testing.NewListAction(servicemeshcontrolplanesResource, servicemeshcontrolplanesKind, c.ns, opts), &v1.ServiceMeshControlPlaneList{})
 
 	if obj == nil {
 		return nil, err
@@ -62,8 +61,8 @@ func (c *FakeServiceMeshControlPlanes) List(ctx context.Context, opts v1.ListOpt
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &corev1.ServiceMeshControlPlaneList{ListMeta: obj.(*corev1.ServiceMeshControlPlaneList).ListMeta}
-	for _, item := range obj.(*corev1.ServiceMeshControlPlaneList).Items {
+	list := &v1.ServiceMeshControlPlaneList{ListMeta: obj.(*v1.ServiceMeshControlPlaneList).ListMeta}
+	for _, item := range obj.(*v1.ServiceMeshControlPlaneList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -72,69 +71,69 @@ func (c *FakeServiceMeshControlPlanes) List(ctx context.Context, opts v1.ListOpt
 }
 
 // Watch returns a watch.Interface that watches the requested serviceMeshControlPlanes.
-func (c *FakeServiceMeshControlPlanes) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeServiceMeshControlPlanes) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(servicemeshcontrolplanesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a serviceMeshControlPlane and creates it.  Returns the server's representation of the serviceMeshControlPlane, and an error, if there is any.
-func (c *FakeServiceMeshControlPlanes) Create(ctx context.Context, serviceMeshControlPlane *corev1.ServiceMeshControlPlane, opts v1.CreateOptions) (result *corev1.ServiceMeshControlPlane, err error) {
+func (c *FakeServiceMeshControlPlanes) Create(ctx context.Context, serviceMeshControlPlane *v1.ServiceMeshControlPlane, opts metav1.CreateOptions) (result *v1.ServiceMeshControlPlane, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(servicemeshcontrolplanesResource, c.ns, serviceMeshControlPlane), &corev1.ServiceMeshControlPlane{})
+		Invokes(testing.NewCreateAction(servicemeshcontrolplanesResource, c.ns, serviceMeshControlPlane), &v1.ServiceMeshControlPlane{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshControlPlane), err
+	return obj.(*v1.ServiceMeshControlPlane), err
 }
 
 // Update takes the representation of a serviceMeshControlPlane and updates it. Returns the server's representation of the serviceMeshControlPlane, and an error, if there is any.
-func (c *FakeServiceMeshControlPlanes) Update(ctx context.Context, serviceMeshControlPlane *corev1.ServiceMeshControlPlane, opts v1.UpdateOptions) (result *corev1.ServiceMeshControlPlane, err error) {
+func (c *FakeServiceMeshControlPlanes) Update(ctx context.Context, serviceMeshControlPlane *v1.ServiceMeshControlPlane, opts metav1.UpdateOptions) (result *v1.ServiceMeshControlPlane, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(servicemeshcontrolplanesResource, c.ns, serviceMeshControlPlane), &corev1.ServiceMeshControlPlane{})
+		Invokes(testing.NewUpdateAction(servicemeshcontrolplanesResource, c.ns, serviceMeshControlPlane), &v1.ServiceMeshControlPlane{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshControlPlane), err
+	return obj.(*v1.ServiceMeshControlPlane), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeServiceMeshControlPlanes) UpdateStatus(ctx context.Context, serviceMeshControlPlane *corev1.ServiceMeshControlPlane, opts v1.UpdateOptions) (*corev1.ServiceMeshControlPlane, error) {
+func (c *FakeServiceMeshControlPlanes) UpdateStatus(ctx context.Context, serviceMeshControlPlane *v1.ServiceMeshControlPlane, opts metav1.UpdateOptions) (*v1.ServiceMeshControlPlane, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceAction(servicemeshcontrolplanesResource, "status", c.ns, serviceMeshControlPlane), &corev1.ServiceMeshControlPlane{})
+		Invokes(testing.NewUpdateSubresourceAction(servicemeshcontrolplanesResource, "status", c.ns, serviceMeshControlPlane), &v1.ServiceMeshControlPlane{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshControlPlane), err
+	return obj.(*v1.ServiceMeshControlPlane), err
 }
 
 // Delete takes name of the serviceMeshControlPlane and deletes it. Returns an error if one occurs.
-func (c *FakeServiceMeshControlPlanes) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeServiceMeshControlPlanes) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteActionWithOptions(servicemeshcontrolplanesResource, c.ns, name, opts), &corev1.ServiceMeshControlPlane{})
+		Invokes(testing.NewDeleteActionWithOptions(servicemeshcontrolplanesResource, c.ns, name, opts), &v1.ServiceMeshControlPlane{})
 
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeServiceMeshControlPlanes) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeServiceMeshControlPlanes) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewDeleteCollectionAction(servicemeshcontrolplanesResource, c.ns, listOpts)
 
-	_, err := c.Fake.Invokes(action, &corev1.ServiceMeshControlPlaneList{})
+	_, err := c.Fake.Invokes(action, &v1.ServiceMeshControlPlaneList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched serviceMeshControlPlane.
-func (c *FakeServiceMeshControlPlanes) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *corev1.ServiceMeshControlPlane, err error) {
+func (c *FakeServiceMeshControlPlanes) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ServiceMeshControlPlane, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(servicemeshcontrolplanesResource, c.ns, name, pt, data, subresources...), &corev1.ServiceMeshControlPlane{})
+		Invokes(testing.NewPatchSubresourceAction(servicemeshcontrolplanesResource, c.ns, name, pt, data, subresources...), &v1.ServiceMeshControlPlane{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshControlPlane), err
+	return obj.(*v1.ServiceMeshControlPlane), err
 }
