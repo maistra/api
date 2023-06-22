@@ -19,13 +19,12 @@ package fake
 import (
 	"context"
 
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
-	corev1 "maistra.io/api/core/v1"
+	v1 "maistra.io/api/core/v1"
 )
 
 // FakeServiceMeshMemberRolls implements ServiceMeshMemberRollInterface
@@ -34,25 +33,25 @@ type FakeServiceMeshMemberRolls struct {
 	ns   string
 }
 
-var servicemeshmemberrollsResource = schema.GroupVersionResource{Group: "maistra.io", Version: "v1", Resource: "servicemeshmemberrolls"}
+var servicemeshmemberrollsResource = v1.SchemeGroupVersion.WithResource("servicemeshmemberrolls")
 
-var servicemeshmemberrollsKind = schema.GroupVersionKind{Group: "maistra.io", Version: "v1", Kind: "ServiceMeshMemberRoll"}
+var servicemeshmemberrollsKind = v1.SchemeGroupVersion.WithKind("ServiceMeshMemberRoll")
 
 // Get takes name of the serviceMeshMemberRoll, and returns the corresponding serviceMeshMemberRoll object, and an error if there is any.
-func (c *FakeServiceMeshMemberRolls) Get(ctx context.Context, name string, options v1.GetOptions) (result *corev1.ServiceMeshMemberRoll, err error) {
+func (c *FakeServiceMeshMemberRolls) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1.ServiceMeshMemberRoll, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(servicemeshmemberrollsResource, c.ns, name), &corev1.ServiceMeshMemberRoll{})
+		Invokes(testing.NewGetAction(servicemeshmemberrollsResource, c.ns, name), &v1.ServiceMeshMemberRoll{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshMemberRoll), err
+	return obj.(*v1.ServiceMeshMemberRoll), err
 }
 
 // List takes label and field selectors, and returns the list of ServiceMeshMemberRolls that match those selectors.
-func (c *FakeServiceMeshMemberRolls) List(ctx context.Context, opts v1.ListOptions) (result *corev1.ServiceMeshMemberRollList, err error) {
+func (c *FakeServiceMeshMemberRolls) List(ctx context.Context, opts metav1.ListOptions) (result *v1.ServiceMeshMemberRollList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(servicemeshmemberrollsResource, servicemeshmemberrollsKind, c.ns, opts), &corev1.ServiceMeshMemberRollList{})
+		Invokes(testing.NewListAction(servicemeshmemberrollsResource, servicemeshmemberrollsKind, c.ns, opts), &v1.ServiceMeshMemberRollList{})
 
 	if obj == nil {
 		return nil, err
@@ -62,8 +61,8 @@ func (c *FakeServiceMeshMemberRolls) List(ctx context.Context, opts v1.ListOptio
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &corev1.ServiceMeshMemberRollList{ListMeta: obj.(*corev1.ServiceMeshMemberRollList).ListMeta}
-	for _, item := range obj.(*corev1.ServiceMeshMemberRollList).Items {
+	list := &v1.ServiceMeshMemberRollList{ListMeta: obj.(*v1.ServiceMeshMemberRollList).ListMeta}
+	for _, item := range obj.(*v1.ServiceMeshMemberRollList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -72,69 +71,69 @@ func (c *FakeServiceMeshMemberRolls) List(ctx context.Context, opts v1.ListOptio
 }
 
 // Watch returns a watch.Interface that watches the requested serviceMeshMemberRolls.
-func (c *FakeServiceMeshMemberRolls) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeServiceMeshMemberRolls) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(servicemeshmemberrollsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a serviceMeshMemberRoll and creates it.  Returns the server's representation of the serviceMeshMemberRoll, and an error, if there is any.
-func (c *FakeServiceMeshMemberRolls) Create(ctx context.Context, serviceMeshMemberRoll *corev1.ServiceMeshMemberRoll, opts v1.CreateOptions) (result *corev1.ServiceMeshMemberRoll, err error) {
+func (c *FakeServiceMeshMemberRolls) Create(ctx context.Context, serviceMeshMemberRoll *v1.ServiceMeshMemberRoll, opts metav1.CreateOptions) (result *v1.ServiceMeshMemberRoll, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(servicemeshmemberrollsResource, c.ns, serviceMeshMemberRoll), &corev1.ServiceMeshMemberRoll{})
+		Invokes(testing.NewCreateAction(servicemeshmemberrollsResource, c.ns, serviceMeshMemberRoll), &v1.ServiceMeshMemberRoll{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshMemberRoll), err
+	return obj.(*v1.ServiceMeshMemberRoll), err
 }
 
 // Update takes the representation of a serviceMeshMemberRoll and updates it. Returns the server's representation of the serviceMeshMemberRoll, and an error, if there is any.
-func (c *FakeServiceMeshMemberRolls) Update(ctx context.Context, serviceMeshMemberRoll *corev1.ServiceMeshMemberRoll, opts v1.UpdateOptions) (result *corev1.ServiceMeshMemberRoll, err error) {
+func (c *FakeServiceMeshMemberRolls) Update(ctx context.Context, serviceMeshMemberRoll *v1.ServiceMeshMemberRoll, opts metav1.UpdateOptions) (result *v1.ServiceMeshMemberRoll, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(servicemeshmemberrollsResource, c.ns, serviceMeshMemberRoll), &corev1.ServiceMeshMemberRoll{})
+		Invokes(testing.NewUpdateAction(servicemeshmemberrollsResource, c.ns, serviceMeshMemberRoll), &v1.ServiceMeshMemberRoll{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshMemberRoll), err
+	return obj.(*v1.ServiceMeshMemberRoll), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeServiceMeshMemberRolls) UpdateStatus(ctx context.Context, serviceMeshMemberRoll *corev1.ServiceMeshMemberRoll, opts v1.UpdateOptions) (*corev1.ServiceMeshMemberRoll, error) {
+func (c *FakeServiceMeshMemberRolls) UpdateStatus(ctx context.Context, serviceMeshMemberRoll *v1.ServiceMeshMemberRoll, opts metav1.UpdateOptions) (*v1.ServiceMeshMemberRoll, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceAction(servicemeshmemberrollsResource, "status", c.ns, serviceMeshMemberRoll), &corev1.ServiceMeshMemberRoll{})
+		Invokes(testing.NewUpdateSubresourceAction(servicemeshmemberrollsResource, "status", c.ns, serviceMeshMemberRoll), &v1.ServiceMeshMemberRoll{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshMemberRoll), err
+	return obj.(*v1.ServiceMeshMemberRoll), err
 }
 
 // Delete takes name of the serviceMeshMemberRoll and deletes it. Returns an error if one occurs.
-func (c *FakeServiceMeshMemberRolls) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *FakeServiceMeshMemberRolls) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteActionWithOptions(servicemeshmemberrollsResource, c.ns, name, opts), &corev1.ServiceMeshMemberRoll{})
+		Invokes(testing.NewDeleteActionWithOptions(servicemeshmemberrollsResource, c.ns, name, opts), &v1.ServiceMeshMemberRoll{})
 
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeServiceMeshMemberRolls) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *FakeServiceMeshMemberRolls) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	action := testing.NewDeleteCollectionAction(servicemeshmemberrollsResource, c.ns, listOpts)
 
-	_, err := c.Fake.Invokes(action, &corev1.ServiceMeshMemberRollList{})
+	_, err := c.Fake.Invokes(action, &v1.ServiceMeshMemberRollList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched serviceMeshMemberRoll.
-func (c *FakeServiceMeshMemberRolls) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *corev1.ServiceMeshMemberRoll, err error) {
+func (c *FakeServiceMeshMemberRolls) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1.ServiceMeshMemberRoll, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(servicemeshmemberrollsResource, c.ns, name, pt, data, subresources...), &corev1.ServiceMeshMemberRoll{})
+		Invokes(testing.NewPatchSubresourceAction(servicemeshmemberrollsResource, c.ns, name, pt, data, subresources...), &v1.ServiceMeshMemberRoll{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*corev1.ServiceMeshMemberRoll), err
+	return obj.(*v1.ServiceMeshMemberRoll), err
 }
