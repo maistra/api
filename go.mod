@@ -1,11 +1,11 @@
 module maistra.io/api
 
-go 1.19
+go 1.20
 
 require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/google/go-cmp v0.5.9
-	github.com/maistra/xns-informer v0.0.0-20230622115340-648631dad831
+	github.com/maistra/xns-informer v0.0.0-20230704082311-af56b540dc35
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/pflag v1.0.5
 	google.golang.org/protobuf v1.30.0
