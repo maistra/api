@@ -1700,11 +1700,10 @@ spec:
                                   balancer is created. This field will be ignored
                                   if the cloud-provider does not support the feature.
                                   Deprecated: This field was under-specified and its
-                                  meaning varies across implementations, and it cannot
-                                  support dual-stack. As of Kubernetes v1.24, users
-                                  are encouraged to use implementation-specific annotations
-                                  when available. This field may be removed in a future
-                                  API version.'
+                                  meaning varies across implementations. Using it
+                                  is non-portable and it may not support dual-stack.
+                                  Users are encouraged to use implementation-specific
+                                  annotations when available.'
                                 type: string
                               loadBalancerSourceRanges:
                                 description: 'If specified and supported by the platform,
@@ -1736,13 +1735,23 @@ spec:
                                     service's port.
                                   properties:
                                     appProtocol:
-                                      description: The application protocol for this
-                                        port. This field follows standard Kubernetes
-                                        label syntax. Un-prefixed names are reserved
-                                        for IANA standard service names (as per RFC-6335
-                                        and https://www.iana.org/assignments/service-names).
-                                        Non-standard protocols should use prefixed
-                                        names such as mycompany.com/my-custom-protocol.
+                                      description: "The application protocol for this
+                                        port. This is used as a hint for implementations
+                                        to offer richer behavior for protocols that
+                                        they understand. This field follows standard
+                                        Kubernetes label syntax. Valid values are
+                                        either: \n * Un-prefixed protocol names -
+                                        reserved for IANA standard service names (as
+                                        per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                        \n * Kubernetes-defined prefixed names:   *
+                                        'kubernetes.io/h2c' - HTTP/2 over cleartext
+                                        as described in https://www.rfc-editor.org/rfc/rfc7540
+                                        \  * 'kubernetes.io/ws'  - WebSocket over
+                                        cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+                                        \  * 'kubernetes.io/wss' - WebSocket over
+                                        TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+                                        \n * Other protocols should use implementation-defined
+                                        prefixed names such as mycompany.com/my-custom-protocol."
                                       type: string
                                     name:
                                       description: The name of this port within the
@@ -2771,10 +2780,9 @@ spec:
                                 balancer is created. This field will be ignored if
                                 the cloud-provider does not support the feature. Deprecated:
                                 This field was under-specified and its meaning varies
-                                across implementations, and it cannot support dual-stack.
-                                As of Kubernetes v1.24, users are encouraged to use
-                                implementation-specific annotations when available.
-                                This field may be removed in a future API version.'
+                                across implementations. Using it is non-portable and
+                                it may not support dual-stack. Users are encouraged
+                                to use implementation-specific annotations when available.'
                               type: string
                             loadBalancerSourceRanges:
                               description: 'If specified and supported by the platform,
@@ -2806,13 +2814,23 @@ spec:
                                   port.
                                 properties:
                                   appProtocol:
-                                    description: The application protocol for this
-                                      port. This field follows standard Kubernetes
-                                      label syntax. Un-prefixed names are reserved
-                                      for IANA standard service names (as per RFC-6335
+                                    description: "The application protocol for this
+                                      port. This is used as a hint for implementations
+                                      to offer richer behavior for protocols that
+                                      they understand. This field follows standard
+                                      Kubernetes label syntax. Valid values are either:
+                                      \n * Un-prefixed protocol names - reserved for
+                                      IANA standard service names (as per RFC-6335
                                       and https://www.iana.org/assignments/service-names).
-                                      Non-standard protocols should use prefixed names
-                                      such as mycompany.com/my-custom-protocol.
+                                      \n * Kubernetes-defined prefixed names:   *
+                                      'kubernetes.io/h2c' - HTTP/2 over cleartext
+                                      as described in https://www.rfc-editor.org/rfc/rfc7540
+                                      \  * 'kubernetes.io/ws'  - WebSocket over cleartext
+                                      as described in https://www.rfc-editor.org/rfc/rfc6455
+                                      \  * 'kubernetes.io/wss' - WebSocket over TLS
+                                      as described in https://www.rfc-editor.org/rfc/rfc6455
+                                      \n * Other protocols should use implementation-defined
+                                      prefixed names such as mycompany.com/my-custom-protocol."
                                     type: string
                                   name:
                                     description: The name of this port within the
@@ -3857,10 +3875,9 @@ spec:
                                 balancer is created. This field will be ignored if
                                 the cloud-provider does not support the feature. Deprecated:
                                 This field was under-specified and its meaning varies
-                                across implementations, and it cannot support dual-stack.
-                                As of Kubernetes v1.24, users are encouraged to use
-                                implementation-specific annotations when available.
-                                This field may be removed in a future API version.'
+                                across implementations. Using it is non-portable and
+                                it may not support dual-stack. Users are encouraged
+                                to use implementation-specific annotations when available.'
                               type: string
                             loadBalancerSourceRanges:
                               description: 'If specified and supported by the platform,
@@ -3892,13 +3909,23 @@ spec:
                                   port.
                                 properties:
                                   appProtocol:
-                                    description: The application protocol for this
-                                      port. This field follows standard Kubernetes
-                                      label syntax. Un-prefixed names are reserved
-                                      for IANA standard service names (as per RFC-6335
+                                    description: "The application protocol for this
+                                      port. This is used as a hint for implementations
+                                      to offer richer behavior for protocols that
+                                      they understand. This field follows standard
+                                      Kubernetes label syntax. Valid values are either:
+                                      \n * Un-prefixed protocol names - reserved for
+                                      IANA standard service names (as per RFC-6335
                                       and https://www.iana.org/assignments/service-names).
-                                      Non-standard protocols should use prefixed names
-                                      such as mycompany.com/my-custom-protocol.
+                                      \n * Kubernetes-defined prefixed names:   *
+                                      'kubernetes.io/h2c' - HTTP/2 over cleartext
+                                      as described in https://www.rfc-editor.org/rfc/rfc7540
+                                      \  * 'kubernetes.io/ws'  - WebSocket over cleartext
+                                      as described in https://www.rfc-editor.org/rfc/rfc6455
+                                      \  * 'kubernetes.io/wss' - WebSocket over TLS
+                                      as described in https://www.rfc-editor.org/rfc/rfc6455
+                                      \n * Other protocols should use implementation-defined
+                                      prefixed names such as mycompany.com/my-custom-protocol."
                                     type: string
                                   name:
                                     description: The name of this port within the
@@ -4843,11 +4870,10 @@ spec:
                               supports specifying the loadBalancerIP when a load balancer
                               is created. This field will be ignored if the cloud-provider
                               does not support the feature. Deprecated: This field
-                              was under-specified and its meaning varies across implementations,
-                              and it cannot support dual-stack. As of Kubernetes v1.24,
-                              users are encouraged to use implementation-specific
-                              annotations when available. This field may be removed
-                              in a future API version.'
+                              was under-specified and its meaning varies across implementations.
+                              Using it is non-portable and it may not support dual-stack.
+                              Users are encouraged to use implementation-specific
+                              annotations when available.'
                             type: string
                           loadBalancerSourceRanges:
                             description: 'If specified and supported by the platform,
@@ -4879,12 +4905,21 @@ spec:
                                 port.
                               properties:
                                 appProtocol:
-                                  description: The application protocol for this port.
-                                    This field follows standard Kubernetes label syntax.
-                                    Un-prefixed names are reserved for IANA standard
-                                    service names (as per RFC-6335 and https://www.iana.org/assignments/service-names).
-                                    Non-standard protocols should use prefixed names
-                                    such as mycompany.com/my-custom-protocol.
+                                  description: "The application protocol for this
+                                    port. This is used as a hint for implementations
+                                    to offer richer behavior for protocols that they
+                                    understand. This field follows standard Kubernetes
+                                    label syntax. Valid values are either: \n * Un-prefixed
+                                    protocol names - reserved for IANA standard service
+                                    names (as per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                    \n * Kubernetes-defined prefixed names:   * 'kubernetes.io/h2c'
+                                    - HTTP/2 over cleartext as described in https://www.rfc-editor.org/rfc/rfc7540
+                                    \  * 'kubernetes.io/ws'  - WebSocket over cleartext
+                                    as described in https://www.rfc-editor.org/rfc/rfc6455
+                                    \  * 'kubernetes.io/wss' - WebSocket over TLS
+                                    as described in https://www.rfc-editor.org/rfc/rfc6455
+                                    \n * Other protocols should use implementation-defined
+                                    prefixed names such as mycompany.com/my-custom-protocol."
                                   type: string
                                 name:
                                   description: The name of this port within the service.
@@ -5252,12 +5287,21 @@ spec:
                             port.
                           properties:
                             appProtocol:
-                              description: The application protocol for this port.
+                              description: "The application protocol for this port.
+                                This is used as a hint for implementations to offer
+                                richer behavior for protocols that they understand.
                                 This field follows standard Kubernetes label syntax.
-                                Un-prefixed names are reserved for IANA standard service
-                                names (as per RFC-6335 and https://www.iana.org/assignments/service-names).
-                                Non-standard protocols should use prefixed names such
-                                as mycompany.com/my-custom-protocol.
+                                Valid values are either: \n * Un-prefixed protocol
+                                names - reserved for IANA standard service names (as
+                                per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                \n * Kubernetes-defined prefixed names:   * 'kubernetes.io/h2c'
+                                - HTTP/2 over cleartext as described in https://www.rfc-editor.org/rfc/rfc7540
+                                \  * 'kubernetes.io/ws'  - WebSocket over cleartext
+                                as described in https://www.rfc-editor.org/rfc/rfc6455
+                                \  * 'kubernetes.io/wss' - WebSocket over TLS as described
+                                in https://www.rfc-editor.org/rfc/rfc6455 \n * Other
+                                protocols should use implementation-defined prefixed
+                                names such as mycompany.com/my-custom-protocol."
                               type: string
                             name:
                               description: The name of this port within the service.
@@ -5979,11 +6023,10 @@ spec:
                               supports specifying the loadBalancerIP when a load balancer
                               is created. This field will be ignored if the cloud-provider
                               does not support the feature. Deprecated: This field
-                              was under-specified and its meaning varies across implementations,
-                              and it cannot support dual-stack. As of Kubernetes v1.24,
-                              users are encouraged to use implementation-specific
-                              annotations when available. This field may be removed
-                              in a future API version.'
+                              was under-specified and its meaning varies across implementations.
+                              Using it is non-portable and it may not support dual-stack.
+                              Users are encouraged to use implementation-specific
+                              annotations when available.'
                             type: string
                           loadBalancerSourceRanges:
                             description: 'If specified and supported by the platform,
@@ -6015,12 +6058,21 @@ spec:
                                 port.
                               properties:
                                 appProtocol:
-                                  description: The application protocol for this port.
-                                    This field follows standard Kubernetes label syntax.
-                                    Un-prefixed names are reserved for IANA standard
-                                    service names (as per RFC-6335 and https://www.iana.org/assignments/service-names).
-                                    Non-standard protocols should use prefixed names
-                                    such as mycompany.com/my-custom-protocol.
+                                  description: "The application protocol for this
+                                    port. This is used as a hint for implementations
+                                    to offer richer behavior for protocols that they
+                                    understand. This field follows standard Kubernetes
+                                    label syntax. Valid values are either: \n * Un-prefixed
+                                    protocol names - reserved for IANA standard service
+                                    names (as per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                    \n * Kubernetes-defined prefixed names:   * 'kubernetes.io/h2c'
+                                    - HTTP/2 over cleartext as described in https://www.rfc-editor.org/rfc/rfc7540
+                                    \  * 'kubernetes.io/ws'  - WebSocket over cleartext
+                                    as described in https://www.rfc-editor.org/rfc/rfc6455
+                                    \  * 'kubernetes.io/wss' - WebSocket over TLS
+                                    as described in https://www.rfc-editor.org/rfc/rfc6455
+                                    \n * Other protocols should use implementation-defined
+                                    prefixed names such as mycompany.com/my-custom-protocol."
                                   type: string
                                 name:
                                   description: The name of this port within the service.
@@ -9473,11 +9525,10 @@ spec:
                                       will be ignored if the cloud-provider does not
                                       support the feature. Deprecated: This field
                                       was under-specified and its meaning varies across
-                                      implementations, and it cannot support dual-stack.
-                                      As of Kubernetes v1.24, users are encouraged
+                                      implementations. Using it is non-portable and
+                                      it may not support dual-stack. Users are encouraged
                                       to use implementation-specific annotations when
-                                      available. This field may be removed in a future
-                                      API version.'
+                                      available.'
                                     type: string
                                   loadBalancerSourceRanges:
                                     description: 'If specified and supported by the
@@ -9510,13 +9561,24 @@ spec:
                                         on service's port.
                                       properties:
                                         appProtocol:
-                                          description: The application protocol for
-                                            this port. This field follows standard
-                                            Kubernetes label syntax. Un-prefixed names
-                                            are reserved for IANA standard service
-                                            names (as per RFC-6335 and https://www.iana.org/assignments/service-names).
-                                            Non-standard protocols should use prefixed
-                                            names such as mycompany.com/my-custom-protocol.
+                                          description: "The application protocol for
+                                            this port. This is used as a hint for
+                                            implementations to offer richer behavior
+                                            for protocols that they understand. This
+                                            field follows standard Kubernetes label
+                                            syntax. Valid values are either: \n *
+                                            Un-prefixed protocol names - reserved
+                                            for IANA standard service names (as per
+                                            RFC-6335 and https://www.iana.org/assignments/service-names).
+                                            \n * Kubernetes-defined prefixed names:
+                                            \  * 'kubernetes.io/h2c' - HTTP/2 over
+                                            cleartext as described in https://www.rfc-editor.org/rfc/rfc7540
+                                            \  * 'kubernetes.io/ws'  - WebSocket over
+                                            cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+                                            \  * 'kubernetes.io/wss' - WebSocket over
+                                            TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+                                            \n * Other protocols should use implementation-defined
+                                            prefixed names such as mycompany.com/my-custom-protocol."
                                           type: string
                                         name:
                                           description: The name of this port within
@@ -10611,11 +10673,10 @@ spec:
                                     when a load balancer is created. This field will
                                     be ignored if the cloud-provider does not support
                                     the feature. Deprecated: This field was under-specified
-                                    and its meaning varies across implementations,
-                                    and it cannot support dual-stack. As of Kubernetes
-                                    v1.24, users are encouraged to use implementation-specific
-                                    annotations when available. This field may be
-                                    removed in a future API version.'
+                                    and its meaning varies across implementations.
+                                    Using it is non-portable and it may not support
+                                    dual-stack. Users are encouraged to use implementation-specific
+                                    annotations when available.'
                                   type: string
                                 loadBalancerSourceRanges:
                                   description: 'If specified and supported by the
@@ -10648,13 +10709,23 @@ spec:
                                       on service's port.
                                     properties:
                                       appProtocol:
-                                        description: The application protocol for
-                                          this port. This field follows standard Kubernetes
-                                          label syntax. Un-prefixed names are reserved
-                                          for IANA standard service names (as per
-                                          RFC-6335 and https://www.iana.org/assignments/service-names).
-                                          Non-standard protocols should use prefixed
-                                          names such as mycompany.com/my-custom-protocol.
+                                        description: "The application protocol for
+                                          this port. This is used as a hint for implementations
+                                          to offer richer behavior for protocols that
+                                          they understand. This field follows standard
+                                          Kubernetes label syntax. Valid values are
+                                          either: \n * Un-prefixed protocol names
+                                          - reserved for IANA standard service names
+                                          (as per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                          \n * Kubernetes-defined prefixed names:
+                                          \  * 'kubernetes.io/h2c' - HTTP/2 over cleartext
+                                          as described in https://www.rfc-editor.org/rfc/rfc7540
+                                          \  * 'kubernetes.io/ws'  - WebSocket over
+                                          cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+                                          \  * 'kubernetes.io/wss' - WebSocket over
+                                          TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+                                          \n * Other protocols should use implementation-defined
+                                          prefixed names such as mycompany.com/my-custom-protocol."
                                         type: string
                                       name:
                                         description: The name of this port within
@@ -11762,11 +11833,10 @@ spec:
                                     when a load balancer is created. This field will
                                     be ignored if the cloud-provider does not support
                                     the feature. Deprecated: This field was under-specified
-                                    and its meaning varies across implementations,
-                                    and it cannot support dual-stack. As of Kubernetes
-                                    v1.24, users are encouraged to use implementation-specific
-                                    annotations when available. This field may be
-                                    removed in a future API version.'
+                                    and its meaning varies across implementations.
+                                    Using it is non-portable and it may not support
+                                    dual-stack. Users are encouraged to use implementation-specific
+                                    annotations when available.'
                                   type: string
                                 loadBalancerSourceRanges:
                                   description: 'If specified and supported by the
@@ -11799,13 +11869,23 @@ spec:
                                       on service's port.
                                     properties:
                                       appProtocol:
-                                        description: The application protocol for
-                                          this port. This field follows standard Kubernetes
-                                          label syntax. Un-prefixed names are reserved
-                                          for IANA standard service names (as per
-                                          RFC-6335 and https://www.iana.org/assignments/service-names).
-                                          Non-standard protocols should use prefixed
-                                          names such as mycompany.com/my-custom-protocol.
+                                        description: "The application protocol for
+                                          this port. This is used as a hint for implementations
+                                          to offer richer behavior for protocols that
+                                          they understand. This field follows standard
+                                          Kubernetes label syntax. Valid values are
+                                          either: \n * Un-prefixed protocol names
+                                          - reserved for IANA standard service names
+                                          (as per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                          \n * Kubernetes-defined prefixed names:
+                                          \  * 'kubernetes.io/h2c' - HTTP/2 over cleartext
+                                          as described in https://www.rfc-editor.org/rfc/rfc7540
+                                          \  * 'kubernetes.io/ws'  - WebSocket over
+                                          cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+                                          \  * 'kubernetes.io/wss' - WebSocket over
+                                          TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+                                          \n * Other protocols should use implementation-defined
+                                          prefixed names such as mycompany.com/my-custom-protocol."
                                         type: string
                                       name:
                                         description: The name of this port within
@@ -12799,11 +12879,10 @@ spec:
                                   balancer is created. This field will be ignored
                                   if the cloud-provider does not support the feature.
                                   Deprecated: This field was under-specified and its
-                                  meaning varies across implementations, and it cannot
-                                  support dual-stack. As of Kubernetes v1.24, users
-                                  are encouraged to use implementation-specific annotations
-                                  when available. This field may be removed in a future
-                                  API version.'
+                                  meaning varies across implementations. Using it
+                                  is non-portable and it may not support dual-stack.
+                                  Users are encouraged to use implementation-specific
+                                  annotations when available.'
                                 type: string
                               loadBalancerSourceRanges:
                                 description: 'If specified and supported by the platform,
@@ -12835,13 +12914,23 @@ spec:
                                     service's port.
                                   properties:
                                     appProtocol:
-                                      description: The application protocol for this
-                                        port. This field follows standard Kubernetes
-                                        label syntax. Un-prefixed names are reserved
-                                        for IANA standard service names (as per RFC-6335
-                                        and https://www.iana.org/assignments/service-names).
-                                        Non-standard protocols should use prefixed
-                                        names such as mycompany.com/my-custom-protocol.
+                                      description: "The application protocol for this
+                                        port. This is used as a hint for implementations
+                                        to offer richer behavior for protocols that
+                                        they understand. This field follows standard
+                                        Kubernetes label syntax. Valid values are
+                                        either: \n * Un-prefixed protocol names -
+                                        reserved for IANA standard service names (as
+                                        per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                        \n * Kubernetes-defined prefixed names:   *
+                                        'kubernetes.io/h2c' - HTTP/2 over cleartext
+                                        as described in https://www.rfc-editor.org/rfc/rfc7540
+                                        \  * 'kubernetes.io/ws'  - WebSocket over
+                                        cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+                                        \  * 'kubernetes.io/wss' - WebSocket over
+                                        TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+                                        \n * Other protocols should use implementation-defined
+                                        prefixed names such as mycompany.com/my-custom-protocol."
                                       type: string
                                     name:
                                       description: The name of this port within the
@@ -13228,12 +13317,21 @@ spec:
                                 port.
                               properties:
                                 appProtocol:
-                                  description: The application protocol for this port.
-                                    This field follows standard Kubernetes label syntax.
-                                    Un-prefixed names are reserved for IANA standard
-                                    service names (as per RFC-6335 and https://www.iana.org/assignments/service-names).
-                                    Non-standard protocols should use prefixed names
-                                    such as mycompany.com/my-custom-protocol.
+                                  description: "The application protocol for this
+                                    port. This is used as a hint for implementations
+                                    to offer richer behavior for protocols that they
+                                    understand. This field follows standard Kubernetes
+                                    label syntax. Valid values are either: \n * Un-prefixed
+                                    protocol names - reserved for IANA standard service
+                                    names (as per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                    \n * Kubernetes-defined prefixed names:   * 'kubernetes.io/h2c'
+                                    - HTTP/2 over cleartext as described in https://www.rfc-editor.org/rfc/rfc7540
+                                    \  * 'kubernetes.io/ws'  - WebSocket over cleartext
+                                    as described in https://www.rfc-editor.org/rfc/rfc6455
+                                    \  * 'kubernetes.io/wss' - WebSocket over TLS
+                                    as described in https://www.rfc-editor.org/rfc/rfc6455
+                                    \n * Other protocols should use implementation-defined
+                                    prefixed names such as mycompany.com/my-custom-protocol."
                                   type: string
                                 name:
                                   description: The name of this port within the service.
@@ -13989,11 +14087,10 @@ spec:
                                   balancer is created. This field will be ignored
                                   if the cloud-provider does not support the feature.
                                   Deprecated: This field was under-specified and its
-                                  meaning varies across implementations, and it cannot
-                                  support dual-stack. As of Kubernetes v1.24, users
-                                  are encouraged to use implementation-specific annotations
-                                  when available. This field may be removed in a future
-                                  API version.'
+                                  meaning varies across implementations. Using it
+                                  is non-portable and it may not support dual-stack.
+                                  Users are encouraged to use implementation-specific
+                                  annotations when available.'
                                 type: string
                               loadBalancerSourceRanges:
                                 description: 'If specified and supported by the platform,
@@ -14025,13 +14122,23 @@ spec:
                                     service's port.
                                   properties:
                                     appProtocol:
-                                      description: The application protocol for this
-                                        port. This field follows standard Kubernetes
-                                        label syntax. Un-prefixed names are reserved
-                                        for IANA standard service names (as per RFC-6335
-                                        and https://www.iana.org/assignments/service-names).
-                                        Non-standard protocols should use prefixed
-                                        names such as mycompany.com/my-custom-protocol.
+                                      description: "The application protocol for this
+                                        port. This is used as a hint for implementations
+                                        to offer richer behavior for protocols that
+                                        they understand. This field follows standard
+                                        Kubernetes label syntax. Valid values are
+                                        either: \n * Un-prefixed protocol names -
+                                        reserved for IANA standard service names (as
+                                        per RFC-6335 and https://www.iana.org/assignments/service-names).
+                                        \n * Kubernetes-defined prefixed names:   *
+                                        'kubernetes.io/h2c' - HTTP/2 over cleartext
+                                        as described in https://www.rfc-editor.org/rfc/rfc7540
+                                        \  * 'kubernetes.io/ws'  - WebSocket over
+                                        cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+                                        \  * 'kubernetes.io/wss' - WebSocket over
+                                        TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+                                        \n * Other protocols should use implementation-defined
+                                        prefixed names such as mycompany.com/my-custom-protocol."
                                       type: string
                                     name:
                                       description: The name of this port within the
